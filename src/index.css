@@ -1,0 +1,14 @@
+body {
+    background-color: #eeecec;
+}
+
+@import "tailwindcss";
+
+/* Oculta la barra de scroll nativa para que se vea limpio pero mantenga la física de arrastre */
+.scrollbar-none::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
