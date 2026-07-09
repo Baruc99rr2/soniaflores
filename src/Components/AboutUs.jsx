@@ -1,68 +1,94 @@
-import React from 'react'
-import { FiTruck, FiShoppingBag, FiDollarSign, FiMessageSquare } from 'react-icons/fi'
+import React from 'react';
+import { FiCheckCircle, FiEye } from 'react-icons/fi';
+// IMPORTACIÓN DEL VIDEO
+import videoPresentacion from '../assets/presentacion.mp4';
 
 const AboutUs = () => {
-  // Array de datos escalable con traducción al inglés
-  const aboutData = [
-    {
-      id: 1,
-      icon: <FiTruck className="text-2xl sm:text-3xl text-amber-600" />,
-      title: "Shipping",
-      text: "Shipping with a minimum surcharge."
-    },
-    {
-      id: 2,
-      icon: <FiShoppingBag className="text-2xl sm:text-3xl text-amber-600" />,
-      title: "About Us",
-      text: "We are entrepreneurs in the textile industry."
-    },
-    {
-      id: 3,
-      icon: <FiDollarSign className="text-2xl sm:text-3xl text-amber-600" />,
-      title: "Payments",
-      text: "The minimum purchase amount is 60,000 pesos."
-    },
-    {
-      id: 4,
-      icon: <FiMessageSquare className="text-2xl sm:text-3xl text-amber-600" />,
-      title: "Special Orders",
-      text: "For custom orders, please contact us directly."
-    }
-  ]
+
+  // ==========================================
+  // PARÁMETROS CONFIGURABLES DE DISEÑO
+  // Modifica estos valores para ajustar el diseño a ojo.
+  // ==========================================
+  const SECTION_HEIGHT = "900px"; // Altura vertical de la sección en PC
+
+  const TEXT_SPACINGS = {
+    paddingTopTextContainer: "pt-12 md:pt-20", // CONTROLA LA ALTURA DEL TÍTULO: Espacio superior del bloque completo (ej: pt-12, pt-16, pt-24, pt-32)
+    marginBottomTitle: "mb-14",       // Espacio debajo del título principal
+    marginBottomMision: "mb-12",      // Espacio debajo del bloque de Misión
+    gapInsideBlock: "gap-3"           // Espacio interno dentro de Misión/Visión
+  };
+  // ==========================================
 
   return (
-    // Degradez
-    <div id="about" className="w-full bg-gradient-to-b from-gray-300 via-gray-700 to-black py-16 px-4 sm:px-6 md:px-24 border-b border-black">
-      <div className="max-w-7xl mx-auto">
+    <div 
+      id="about" 
+      className="w-full flex flex-col md:flex-row bg-black overflow-hidden border-b border-black"
+      style={{
+        minHeight: window.innerWidth >= 768 ? SECTION_HEIGHT : 'auto'
+      }}
+    >
+      
+      {/* 1. SECCIÓN IZQUIERDA: CONTENEDOR DEL VIDEO (VERTICAL CELULAR) */}
+      <div 
+        className="relative w-full md:w-1/2 h-[70vh] overflow-hidden bg-gray-900"
+        style={{
+          height: window.innerWidth >= 768 ? SECTION_HEIGHT : '70vh'
+        }}
+      >
+        <video
+          src={videoPresentacion}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+        />
+        <div className="absolute inset-0 bg-black/10 pointer-events-none" />
+      </div>
+
+      {/* 2. SECCIÓN DERECHA: CONTENEDOR DE TEXTOS */}
+      {/* Se cambió 'justify-center' por 'justify-start' para empujar el contenido hacia arriba, regulado por el parámetro de paddingTop */}
+      <div className={`w-full md:w-1/2 bg-gradient-to-br from-red-900/60 via-stone-900 to-black p-8 sm:p-12 md:p-16 flex flex-col justify-start text-white ${TEXT_SPACINGS.paddingTopTextContainer}`}>
         
-        {/* Grilla responsiva: 2 columnas en móvil (2x2), 4 columnas en PC */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {aboutData.map((item) => (
-            <div 
-              key={item.id} 
-              className="bg-white p-4 sm:p-6 rounded-xl border border-gray-200 shadow-lg flex flex-col items-center text-center transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
-            >
-              {/* Contenedor del Icono */}
-              <div className="mb-3 sm:mb-4 p-2 sm:p-3 bg-amber-50 rounded-full flex items-center justify-center">
-                {item.icon}
-              </div>
-              
-              {/* Título en Negrita */}
-              <h3 className="text-sm sm:text-lg font-bold text-gray-800 mb-1 sm:mb-2 uppercase tracking-wide">
-                {item.title}
-              </h3>
-              
-              {/* Descripción */}
-              <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                {item.text}
-              </p>
-            </div>
-          ))}
+        {/* Título Principal */}
+        <h2 className={`text-2xl sm:text-3xl md:text-4xl font-extrabold text-red-500 leading-tight tracking-wide max-w-xl ${TEXT_SPACINGS.marginBottomTitle}`}>
+          Buscamos superar las expectativas de nuestros clientes
+        </h2>
+
+        {/* Bloque de Contenido: Misión */}
+        <div className={`flex flex-col max-w-xl ${TEXT_SPACINGS.gapInsideBlock} ${TEXT_SPACINGS.marginBottomMision}`}>
+          <div className="flex items-center gap-3">
+            <span className="text-xl md:text-2xl text-red-500 shrink-0">
+              <FiCheckCircle />
+            </span>
+            <h3 className="text-lg md:text-xl font-bold tracking-wider uppercase text-gray-100">
+              Misión
+            </h3>
+          </div>
+          <p className="text-sm md:text-base text-gray-300 font-light leading-relaxed pl-8 md:pl-9">
+            En Sonia Flores Inmobiliaria impulsamos soluciones inmobiliarias y desarrollos innovadores de alta calidad en el norte argentino. En nuestro servicio combinamos la calidez de un trato cercano, el talento joven y nuevas tecnologías para abrir nuevas oportunidades.
+          </p>
+        </div>
+
+        {/* Bloque de Contenido: Visión */}
+        <div className={`flex flex-col max-w-xl ${TEXT_SPACINGS.gapInsideBlock}`}>
+          <div className="flex items-center gap-3">
+            <span className="text-xl md:text-2xl text-red-500 shrink-0">
+              <FiEye />
+            </span>
+            <h3 className="text-lg md:text-xl font-bold tracking-wider uppercase text-gray-100">
+              Visión
+            </h3>
+          </div>
+          <p className="text-sm md:text-base text-gray-300 font-light leading-relaxed pl-8 md:pl-9">
+            Ser la inmobiliaria líder de Jujuy y referente digital del norte argentino, ofreciendo soluciones habitacionales y oportunidades de inversión ágiles, accesibles y transparentes. Impulsamos comunidades con proyectos innovadores y un servicio humano que combina velocidad, tecnología y talento joven en mejora continua.
+          </p>
         </div>
 
       </div>
-    </div>
-  )
-}
 
-export default AboutUs
+    </div>
+  );
+};
+
+export default AboutUs;

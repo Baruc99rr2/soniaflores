@@ -1,253 +1,174 @@
-import React, { useContext, useState, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { ShopContext } from "./ShopContext";
-import { categoryItem } from "../data";
 import { Link } from "react-router-dom";
-import { IoMdAdd, IoMdRemove } from 'react-icons/io';
-import { MdAddShoppingCart, MdKeyboardArrowLeft as ArrowLeft, MdKeyboardArrowRight as ArrowRight } from 'react-icons/md';
+import { MdLocationOn, MdOutlineBathtub } from 'react-icons/md';
+import { 
+  BiBed, BiArea, BiHomeAlt, BiBuilding, BiLandscape, 
+  BiQuestionMark, BiPackage, BiCar, BiStore, BiBuildingHouse 
+} from 'react-icons/bi';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCoverflow, Pagination, Mousewheel } from "swiper/modules";
 
-// COMPONENTE AUXILIAR PARA EL EFECTO DE DESLIZAMIENTO
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+
+// COMPONENTE AUXILIAR OPTIMIZADO PARA REVELADO AL HACER SCROLL
 const ScrollReveal = ({ children, delay = "delay-0" }) => {
   const [isVisible, setIsVisible] = useState(false);
   const domRef = useRef();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-            observer.unobserve(entry.target);
-          }
-        });
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(domRef.current);
+        }
       },
-      { 
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px"
-      }
+      { threshold: 0.05, rootMargin: "0px 0px -30px 0px" }
     );
-
-    if (domRef.current) {
-      observer.observe(domRef.current);
-    }
-
-    return () => {
-      if (domRef.current) observer.unobserve(domRef.current);
-    };
+    if (domRef.current) observer.observe(domRef.current);
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <div
-      ref={domRef}
-      className={`transform transition-all duration-1000 ease-out ${delay} ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-      }`}
-    >
+    <div ref={domRef} className={`transform transition-all duration-1000 ease-out ${delay} ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
       {children}
     </div>
   );
 };
 
-const ProductCard = ({ product, addToCart }) => {
-  const [localAmount, setLocalAmount] = useState(1);
-  const [currentImgIndex, setCurrentImgIndex] = useState(0);
+// TARJETA DE PROPIEDAD
+const ProductCard = ({ product }) => {
+  const displayImage = product.images?.[0] || '/propiedades/unisex.jpg';
+  const formattedPrice = new Intl.NumberFormat('es-AR').format(product.price);
+  const priceText = product.category === 'Alquiler' ? `USD ${formattedPrice} / mes` : `USD ${formattedPrice}`;
 
-  const images = product.images && product.images.length > 0 ? product.images : [product.image];
-
-  const handleDecrease = () => {
-    if (localAmount > 1) setLocalAmount(localAmount - 1);
-  };
-
-  const handleIncrease = () => {
-    setLocalAmount(localAmount + 1);
-  };
-
-  const handleAdd = () => {
-    addToCart(product, product.id, localAmount);
-    setLocalAmount(1); 
-  };
-
-  const nextImage = (e) => {
-    e.preventDefault();
-    setCurrentImgIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
-
-  const prevImage = (e) => {
-    e.preventDefault();
-    setCurrentImgIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+  const getTypeIcon = (type) => {
+    const key = type?.toLowerCase() || "";
+    if (key.includes("casa")) return <BiHomeAlt className="text-gray-700 text-lg" />;
+    if (key.includes("depto") || key.includes("departamento")) return <BiBuildingHouse className="text-gray-700 text-lg" />;
+    if (key.includes("galpon") || key.includes("deposito") || key.includes("industrial")) return <BiPackage className="text-gray-700 text-lg" />;
+    if (key.includes("local") || key.includes("comercio") || key.includes("tienda")) return <BiStore className="text-gray-700 text-lg" />;
+    if (key.includes("oficina")) return <BiBuilding className="text-gray-700 text-lg" />;
+    if (key.includes("cochera") || key.includes("garage") || key.includes("estacionamiento")) return <BiCar className="text-gray-700 text-lg" />;
+    if (key.includes("terreno") || key.includes("lote") || key.includes("campo")) return <BiLandscape className="text-gray-700 text-lg" />;
+    return <BiQuestionMark className="text-gray-700 text-lg" />;
   };
 
   return (
-    <div className="bg-white border border-gray-100 rounded-lg p-2.5 md:p-3 transition-transform duration-200 hover:shadow-md flex flex-col justify-between group">
+    <div className="airbnb-property-card bg-white rounded-2xl p-4 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between group w-[300px] md:w-[340px] mx-auto pointer-events-auto font-sans">
       <div>
-        {/* CORRECCIÓN ALTURA DE TARJETA: h-[170px] en celulares evita que sea estirada */}
-        <div className="relative w-full h-[170px] md:h-[250px] overflow-hidden rounded-md mb-2 bg-gray-50/50 flex items-center justify-center">
-          
-          <Link to={`/product/${product.id}`} className="w-full h-full flex items-center justify-center">
-            <img
-              src={images[currentImgIndex]}
-              alt={product.name}
-              className="max-h-full max-w-full object-contain transition-transform duration-300 hover:scale-105 select-none pointer-events-none"
-            />
-          </Link>
-
-          {images.length > 1 && (
-            <>
-              
-              <button
-                onClick={prevImage}
-                className="absolute left-1 top-1/2 -translate-y-1/2 bg-white/90 md:bg-white/80 p-1 rounded-full text-gray-800 shadow hover:bg-white transition opacity-100 md:opacity-0 md:group-hover:opacity-100 z-10 active:scale-75"
-                title="Imagen anterior"
-              >
-                <ArrowLeft className="text-lg md:text-xl" />
-              </button>
-              <button
-                onClick={nextImage}
-                className="absolute right-1 top-1/2 -translate-y-1/2 bg-white/90 md:bg-white/80 p-1 rounded-full text-gray-800 shadow hover:bg-white transition opacity-100 md:opacity-0 md:group-hover:opacity-100 z-10 active:scale-75"
-                title="Siguiente imagen"
-              >
-                <ArrowRight className="text-lg md:text-xl" />
-              </button>
-
-              {/* Indicadores ocultos sutilmente en mobile para limpiar la foto compacta, visibles en PC */}
-              <div className="absolute bottom-1.5 hidden md:flex gap-1 justify-center w-full">
-                {images.map((_, idx) => (
-                  <div 
-                    key={idx} 
-                    className={`h-1 w-1 rounded-full transition-all ${idx === currentImgIndex ? 'bg-amber-500 w-2.5' : 'bg-gray-300'}`}
-                  />
-                ))}
-              </div>
-            </>
-          )}
+        <div className="relative w-full h-[210px] md:h-[230px] overflow-hidden rounded-xl mb-3 bg-gray-50 flex items-center justify-center">
+          <img src={displayImage} alt={product.name} className="w-full h-full object-cover select-none pointer-events-none transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+          <div className="absolute top-3 left-3 z-10"><span className="text-[11px] font-bold text-gray-900 bg-white px-2.5 py-1 rounded-md shadow-md uppercase">{product.category || "VENTA"}</span></div>
+          <div className="absolute top-3 right-3 bg-white/90 hover:bg-white p-2 rounded-full shadow-md z-10 flex items-center justify-center">{getTypeIcon(product.detalles?.tipo)}</div>
         </div>
         
-        <div className="text-left px-0.5">
-          <h4 className="text-xs md:text-sm font-medium text-gray-700 truncate">
-            {product.name}
-          </h4>
-          
-          <div className="flex items-center justify-between mt-1 md:mt-1.5">
-            <p className="text-black font-bold text-base md:text-lg">
-              ${product.price}
-            </p>
-            
-            <button
-              onClick={handleAdd}
-              className="w-8 h-7 md:w-10 md:h-8 border border-black bg-black text-white rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 active:scale-90"
-              title="Añadir al carrito"
-            >
-              <MdAddShoppingCart className="text-sm md:text-lg" />
-            </button>
+        <div className="text-left px-0.5 select-none mb-3">
+          <div className="flex items-start justify-between gap-2 mb-1">
+            <span className="text-xs font-semibold text-gray-400 truncate max-w-[70%]">{product.detalles?.barrio || "Ubicación no especificada"}</span>
+            <span className="text-xs font-medium text-gray-800 bg-gray-100 px-2 py-0.5 rounded shrink-0">{product.detalles?.tipo || "Inmueble"}</span>
           </div>
+          <h4 className="property-card-title text-sm md:text-base font-bold text-gray-900 line-clamp-1 leading-tight mb-1 transition-colors duration-300">{product.name}</h4>
+          
+          <div className="flex items-center gap-3 text-xs text-gray-500 my-2 py-1 border-b border-gray-100/70">
+            <span className="flex items-center gap-1"><BiBed className="text-sm text-gray-600" /> <span className="font-medium">{product.detalles?.habitaciones || 0} Dorm.</span></span>
+            <span className="flex items-center gap-1"><MdOutlineBathtub className="text-sm text-gray-600" /> <span className="font-medium">{product.detalles?.banos || 0} Baños</span></span>
+            <span className="flex items-center gap-1"><BiArea className="text-sm text-gray-600" /> <span className="font-medium">{product.detalles?.superficie_m2 || 0} m²</span></span>
+          </div>
+          <div className="text-base font-bold text-gray-900 mt-1"><span className="font-extrabold text-lg text-gray-900">{priceText}</span></div>
         </div>
       </div>
-
-      {/* CORRECCIÓN DESBORDAMIENTO CANTIDAD: Ajuste de padding, gap y tamaño de fuentes para pantallas pequeñas */}
-      <div className="flex items-center justify-between mt-2.5 bg-gray-50 py-1 px-1.5 md:px-2 rounded-md border border-gray-150">
-        <span className="text-[10px] md:text-xs font-semibold text-gray-400 uppercase tracking-wider">Cant.</span>
-        <div className="flex items-center gap-1.5 md:gap-3">
-          <button 
-            onClick={handleDecrease}
-            className="w-4.5 h-4.5 md:w-5 md:h-5 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-100 transition active:scale-95 text-[10px] md:text-xs font-bold"
-          >
-            <IoMdRemove />
-          </button>
-          <span className="text-xs md:text-sm font-semibold w-3 md:w-4 text-center select-none text-gray-800">{localAmount}</span>
-          <button 
-            onClick={handleIncrease}
-            className="w-4.5 h-4.5 md:w-5 md:h-5 bg-white border border-gray-200 rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-100 transition active:scale-95 text-[10px] md:text-xs font-bold"
-          >
-            <IoMdAdd />
-          </button>
-        </div>
-      </div>
+      <Link to={`/product/${product.id}`} className="property-card-button w-full text-white text-center text-xs md:text-sm font-bold py-3 px-4 rounded-xl transition-colors duration-300 block shadow-xs mt-2">Ver detalles</Link>
     </div>
   );
 };
 
+// CONTENEDOR PRINCIPAL
 const ProductList = () => {
-  const { products, addToCart } = useContext(ShopContext);
-  const [category, setCategory] = useState("All");
+  const { products } = useContext(ShopContext);
+  const baseProducts = products?.slice(0, 10) || [];
 
   return (
-    <div id="dishes" className="px-3 md:px-4 py-8 md:py-12 max-w-7xl mx-auto overflow-hidden">
+    <div id="latest-listings" className="animated-gradient-bg w-full pt-20 pb-28 overflow-hidden relative">
       
-      {/* SECCIÓN 1: SHOP BY CATEGORY */}
-      <ScrollReveal>
-        <div className="text-center mb-4 md:mb-6">
-          <h1 className="text-2xl md:text-4xl font-bold">Shop By Category</h1>
-        </div>
-        
-        <div className="mb-1 py-4 md:py-6">
-          <ul className="flex flex-wrap justify-center gap-4 md:gap-10">
-            {categoryItem.map((item, index) => {
-              const isActive = category === item.category_title;
-              return (
-                <li
-                  key={index}
-                  onClick={() =>
-                    setCategory((prev) =>
-                      prev === item.category_title ? "All" : item.category_title
-                    )
-                  }
-                  className="list-none cursor-pointer"
-                >
-                  <div
-                    className={`
-                      relative h-20 w-20 md:h-30 md:w-30 rounded-full overflow-hidden
-                      border-2 transition-all duration-300
-                      ${isActive ? "border-amber-500 ring-2 ring-amber-400 scale-105" : "hover:border-amber-400 hover:scale-105"}
-                    `}
-                  >
-                    <img
-                      src={item.image}
-                      alt={item.category_title}
-                      className="h-full w-full object-cover"
-                    />
-                    <div className="absolute inset-0 flex items-end justify-center">
-                      <span
-                        className={`
-                          mb-1.5 px-2 py-0.5 md:px-4 md:py-1 rounded-full text-[9px] md:text-xs font-semibold
-                          text-white backdrop-blur
-                          ${isActive ? "bg-amber-500" : "bg-black/60"}
-                        `}
-                      >
-                        {item.category_title}
-                      </span>
-                    </div>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </ScrollReveal>
+      <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
+        <ScrollReveal>
+          <div className="text-center flex flex-col items-center select-none">
+            <h1 className="text-3xl md:text-5xl font-bold tracking-wide dynamic-title">Últimas Novedades</h1>
+            <p className="text-base md:text-xl mt-3 font-medium dynamic-subtitle">Conoce las últimas propiedades que tenemos para ofrecerte</p>
+            <div className="flex items-center w-full max-w-[240px] sm:max-w-[320px] mt-5">
+              <div className="flex-1 h-[2px] dynamic-line" />
+              <span className="px-3 text-xl dynamic-icon"><MdLocationOn /></span>
+              <div className="flex-1 h-[2px] dynamic-line" />
+            </div>
+          </div>
+        </ScrollReveal>
+      </div>
 
-      {/* SECCIÓN 2: OUR COLLECTION */}
       <ScrollReveal delay="delay-100">
-        <h2 className="mt-4 md:mt-6 text-2xl md:text-4xl text-center mb-4 md:mb-6 font-semibold">
-          Our Collection
-        </h2>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 px-1 md:px-0">
-          {products.length > 0 ? (
-            products
-              .filter((product) => category === "All" || category === product.category)
-              .map((product) => (
-                <ProductCard 
-                  key={product.id} 
-                  product={product} 
-                  addToCart={addToCart} 
-                />
-              ))
+        <div className="relative w-full mt-10 px-4 md:px-10 standard-swiper-container relative z-10">
+          {baseProducts.length > 0 ? (
+            <Swiper
+              grabCursor={true} centeredSlides={true} slidesPerView={"auto"} speed={600} effect={"coverflow"} loop={true} mousewheel={{ forceToAxis: true }}
+              pagination={{ clickable: true, dynamicBullets: true }}
+              coverflowEffect={{ rotate: 35, stretch: -10, depth: 120, modifier: 1, slideShadows: true }}
+              modules={[EffectCoverflow, Pagination, Mousewheel]} className="py-6" 
+            >
+              {baseProducts.map((product, idx) => (
+                <SwiperSlide key={`${product.id}-${idx}`} style={{ width: 'auto' }}>
+                  <ProductCard product={product} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
           ) : (
-            <p className="text-sm col-span-full text-center text-gray-500">
-              Nothing in the menu
-            </p>
+            <p className="text-sm text-center text-gray-400 w-full py-8">No hay propiedades disponibles en este momento.</p>
           )}
         </div>
       </ScrollReveal>
 
+      {/* ESTILOS CSS CON PALETA ROJO / AZUL MARINO DE MEDIANOCHE */}
+      <style>{`
+        /* Fondo Animado Lento: Sin negros absolutos para proteger contraste */
+        .animated-gradient-bg {
+          background: linear-gradient(-45deg, #fee2e2, #fca5a5, #991b1b, #1e1b4b, #0f172a, #31102f);
+          background-size: 400% 400%;
+          animation: fluidGradient 26s ease infinite; /* Un toque más lento aún */
+        }
+
+        @keyframes fluidGradient {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+
+        /* Colores balanceados fijos para no opacar el texto en transiciones */
+        .dynamic-title { color: #ffffff; text-shadow: 0 2px 4px rgba(0,0,0,0.15); }
+        .dynamic-subtitle { color: #f3f4f6; opacity: 0.9; }
+        .dynamic-icon { color: #fca5a5; }
+        .dynamic-line { background-color: rgba(255, 255, 255, 0.25); }
+
+        /* Swiper Config */
+        .standard-swiper-container .swiper-pagination { position: absolute !important; bottom: -36px !important; }
+        .standard-swiper-container .swiper-pagination-bullet-active { background: #f87171 !important; }
+        .standard-swiper-container .swiper { overflow: visible !important; }
+        .swiper-slide { transform-style: preserve-3d; backface-visibility: hidden; }
+
+        /* Estados de Tarjetas (Fuera del centro) */
+        .standard-swiper-container .airbnb-property-card {
+          /* Sombras marcadas e intensas para saltar del fondo azul/rojo oscuro */
+          box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.4) !important;
+        }
+        .standard-swiper-container .airbnb-property-card .property-card-title { color: #111827 !important; }
+        .standard-swiper-container .airbnb-property-card .property-card-button { background-color: #111827 !important; }
+
+        /* En el centro (.swiper-slide-active) */
+        .standard-swiper-container .swiper-slide-active .airbnb-property-card .property-card-title { color: #dc2626 !important; }
+        .standard-swiper-container .swiper-slide-active .airbnb-property-card .property-card-button { background-color: #dc2626 !important; }
+        .standard-swiper-container .swiper-slide-active .airbnb-property-card .property-card-button:hover { background-color: #b91c1c !important; }
+      `}</style>
     </div>
   );
 };

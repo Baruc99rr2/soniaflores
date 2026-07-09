@@ -1,94 +1,87 @@
-import React, { useState, useEffect } from 'react'
-import ml1Orange from '../assets/ml1-orange.png'
-import ml1Green from '../assets/ml1-green.png'
-import ml1Blue from '../assets/ml1-blue.png'
-import ml1Red from '../assets/ml1-red.png'
+import React, { useState, useEffect } from 'react';
+import heroVideo from '../assets/hero-video.mp4';
+// IMPORTACIÓN DE ICONOS PARA LA INFO DE CONTACTO
+import { FaMapMarkerAlt, FaPhoneAlt } from 'react-icons/fa';
 
 const Hero = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  const colorStates = [
-    { id: 'orange', bgClass: 'bg-orange-500', img: ml1Orange },
-    { id: 'green',  bgClass: 'bg-emerald-600', img: ml1Green },
-    { id: 'blue',   bgClass: 'bg-blue-600',    img: ml1Blue },
-    { id: 'red',    bgClass: 'bg-rose-600',    img: ml1Red }
-  ];
-
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % colorStates.length);
-    }, 5000);
-
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
     };
 
     window.addEventListener("resize", handleResize);
-
     return () => {
-      clearInterval(interval);
       window.removeEventListener("resize", handleResize);
     };
   }, []);
 
-  const current = colorStates[currentIndex];
-
-  // BREAKPOINT CRÍTICO SOLICITADO (1100px)
+  // Breakpoint crítico de 1100px
   const isResponsiveMode = windowWidth < 1100;
 
   return (
-    <div className={`min-h-screen flex flex-col items-center justify-center transition-colors duration-1000 delay-200 ease-in-out ${current.bgClass} ${isResponsiveMode ? 'pt-28 pb-12' : 'pt-0'}`}>
+    <div className={`relative min-h-screen flex flex-col items-center justify-center overflow-hidden ${isResponsiveMode ? 'pt-24 pb-12' : 'pt-0'}`}>
       
-      {/* Contenedor dinámico basado en los 1100px */}
-      <div className={`flex justify-between items-center px-6 md:px-12 lg:px-24 gap-8 w-full max-w-screen-xl z-10 ${isResponsiveMode ? 'flex-col text-center' : 'flex-row text-left'}`}>
-        
-        {/* Contenido Izquierdo (Textos) */}
-        <div className={`w-full text-white select-none ${isResponsiveMode ? 'max-w-xl order-2' : 'max-w-[50%] order-1'}`}>
-          <h2 className={`text-xl md:text-2xl lg:text-3xl font-semibold text-black/40 bg-white/20 px-4 py-1 rounded-full w-fit backdrop-blur-sm ${isResponsiveMode ? 'mx-auto' : 'mx-0'}`}>
-            Where Designs Meet Couture
-          </h2>
-          <h1 className={`font-bold mt-3 leading-tight ${isResponsiveMode ? 'text-3xl sm:text-4xl' : 'text-4xl lg:text-5xl xl:text-6xl'}`}>
-            Effortlessly Style Yourself With Premium Collection
-          </h1>
-          <p className="text-base md:text-lg text-white/80 mt-4 font-medium">
-            From everyday essentials to statement pieces, redefine your style with fashion that’s as bold and unique as you are.
-          </p>
-        </div>
+      {/* 1. Video de Fondo */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute top-0 left-0 w-full h-full object-cover z-0"
+      >
+        <source src={heroVideo} type="video/mp4" />
+        Tu navegador no soporta videos integrados.
+      </video>
 
-        {/* Contenido Derecho (Prenda + Sombra) */}
-        <div className={`w-full flex flex-col justify-center items-center ${isResponsiveMode ? 'max-w-xs order-1 mb-4' : 'max-w-[50%] order-2'}`}>
+      {/* 2. Capa oscura para legibilidad */}
+      <div className="absolute top-0 left-0 w-full h-full bg-black/45 z-10" />
+
+      {/* 3. Contenedor de Texto Responsivo */}
+      <div className="relative flex justify-center items-center px-6 sm:px-12 md:px-24 w-full max-w-screen-xl z-20 text-center">
+        
+        <div className={`w-full text-white select-none transition-all duration-300 flex flex-col items-center ${isResponsiveMode ? 'max-w-md' : 'max-w-4xl'}`}>
           
-          {/* Contenedor maestro con "will-change" para forzar aceleración por GPU */}
-          <div className="relative flex flex-col items-center justify-center will-change-transform animate-[premiumFloat_4s_ease-in-out_infinite]">
+          {/* Título Principal */}
+          <h1 className="font-bold leading-tight tracking-wide drop-shadow-md text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
+            Tu futuro empieza en la puerta de tu nuevo hogar
+          </h1>
+
+          {/* Bloque de Datos de Contacto Inferior (Texto más chico) */}
+          <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-stone-200 text-xs sm:text-sm md:text-base font-light tracking-wide bg-black/20 px-5 py-3 sm:py-2 rounded-2xl sm:rounded-full backdrop-blur-sm border border-white/5 shadow-lg">
             
-            {/* La Prenda */}
-            <img 
-              src={current.img} 
-              alt="Hero Collection" 
-              className={`w-full h-auto object-contain select-none pointer-events-none transition-all duration-200 ease-out drop-shadow-xl ${isResponsiveMode ? 'max-w-[280px]' : 'max-w-[410px] lg:max-w-[440px]'}`}
-            />
-            
-            {/* Sombra integrada */}
-            <div className="w-40 h-3.5 bg-black/15 rounded-full blur-md mt-2 transition-transform duration-500"></div>
+            {/* Ubicación */}
+            <div className="flex items-center gap-2">
+              <FaMapMarkerAlt className="text-red-500 shrink-0" />
+              <span>Independencia 1167, San Salvador de Jujuy, Argentina.</span>
+            </div>
+
+            {/* Separador visual para pantallas medianas/grandes */}
+            <span className="hidden sm:inline text-white/30">|</span>
+
+            {/* Teléfono directo para Llamadas con horarios aclarados */}
+            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3">
+              <a 
+                href="tel:+5438854881245" 
+                className="flex items-center gap-2 hover:text-red-400 transition-colors cursor-pointer"
+                title="Llamar por teléfono"
+              >
+                <FaPhoneAlt className="text-red-500 shrink-0 text-xs" />
+                <span className="font-medium">388 54881245</span>
+              </a>
+              <span className="text-xs text-stone-400 font-normal">
+                (Solo llamadas • 9 a 12 y 16 a 18 hs)
+              </span>
+            </div>
+
           </div>
 
         </div>
-      </div>
 
-      {/* Estilos CSS ultra fluidos */}
-      <style>{`
-        @keyframes premiumFloat {
-          0%, 100% { 
-            transform: translate3d(0, 0, 0) scale(1); 
-          }
-          50% { 
-            transform: translate3d(0, -14px, 0) scale(0.98); 
-          }
-        }
-      `}</style>
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default Hero;
