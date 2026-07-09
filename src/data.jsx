@@ -28,7 +28,9 @@ export const productsData = [
             antiguedad: 0,
             servicios: ['Agua Potable', 'Gas Natural', 'Electricidad', 'Pavimento'],
             adicionales: ['Cerramiento perimetral'],
-            mapaQuery: 'Av. Balbín 2300, Bajo La Viña, San Salvador de Jujuy'
+            mapaQuery: 'Av. Balbín 2300, Bajo La Viña, San Salvador de Jujuy',
+            lat: -24.1801267,
+            lon: -65.2800849,
         }
     },
     {
@@ -45,7 +47,7 @@ export const productsData = [
         detalles: {
             tipo: 'Casa',
             barrio: 'Los Perales',
-            calle: 'Los Jacarandás',
+            calle: 'El hornero',
             numero: '',
             mostrarDireccionExacta: false,
             superficie_m2: 250,
@@ -57,7 +59,9 @@ export const productsData = [
             antiguedad: 8,
             servicios: ['Agua Potable', 'Cloaca', 'Gas Natural', 'Electricidad', 'Pavimento'],
             adicionales: ['Jardín'],
-            mapaQuery: 'Barrio Los Perales, San Salvador de Jujuy'
+            mapaQuery: 'Barrio Los Perales, San Salvador de Jujuy',
+            lat: -24.169136,
+            lon: -65.322097,
         }
     },
     {
@@ -85,7 +89,9 @@ export const productsData = [
             expensas: 12000,
             servicios: ['Agua Potable', 'Cloaca', 'Gas Natural', 'Electricidad', 'Pavimento'],
             adicionales: [],
-            mapaQuery: 'Patricias Argentinas 400, Centro, San Salvador de Jujuy'
+            mapaQuery: 'Patricias Argentinas 400, Centro, San Salvador de Jujuy',
+            lat: -24.184249,
+            lon: -65.311149,
         }
     },
     {
@@ -113,7 +119,9 @@ export const productsData = [
             expensas: 15000,
             servicios: ['Agua Potable', 'Cloaca', 'Gas Natural', 'Electricidad', 'Pavimento'],
             adicionales: [],
-            mapaQuery: 'Barrio Ciudad de Nieva, San Salvador de Jujuy'
+            mapaQuery: 'Barrio Ciudad de Nieva, San Salvador de Jujuy',
+            lat: -24.187430,
+            lon: -65.317687,
         }
     },
     {
@@ -142,7 +150,9 @@ export const productsData = [
             expensas: 8000,
             servicios: ['Agua Potable', 'Cloaca', 'Electricidad', 'Pavimento'],
             adicionales: [],
-            mapaQuery: 'Belgrano 700, Centro, San Salvador de Jujuy'
+            mapaQuery: 'Belgrano 700, Centro, San Salvador de Jujuy',
+            lat: -24.185324,
+            lon: -65.302751,
         }
     },
     {
@@ -168,7 +178,9 @@ export const productsData = [
             antiguedad: 15,
             servicios: ['Agua Potable', 'Electricidad', 'Pavimento'],
             adicionales: ['Cerramiento perimetral'],
-            mapaQuery: 'Ruta 1, Palpalá, Jujuy'
+            mapaQuery: 'Ruta 1, Palpalá, Jujuy',
+            lat: -24.269589,
+            lon: -65.165533,
         }
     },
     {
@@ -195,7 +207,9 @@ export const productsData = [
             expensas: 18000,
             servicios: ['Agua Potable', 'Cloaca', 'Electricidad', 'Pavimento'],
             adicionales: [],
-            mapaQuery: 'Necochea 300, Centro, San Salvador de Jujuy'
+            mapaQuery: 'Necochea 300, Centro, San Salvador de Jujuy',
+            lat: -24.185488,
+            lon: -65.304213,
         }
     },
     {
@@ -220,7 +234,9 @@ export const productsData = [
             expensas: 3500,
             servicios: ['Electricidad', 'Pavimento'],
             adicionales: [],
-            mapaQuery: 'San Martín 1000, Centro, San Salvador de Jujuy'
+            mapaQuery: 'San Martín 1000, Centro, San Salvador de Jujuy',
+            lat: -24.186714,
+            lon: -65.306697,
         }
     },
     {
@@ -244,7 +260,9 @@ export const productsData = [
             antiguedad: 10,
             servicios: ['Agua Potable', 'Electricidad', 'Pavimento'],
             adicionales: [],
-            mapaQuery: 'Barrio Almirante Brown, San Salvador de Jujuy'
+            mapaQuery: 'Barrio Almirante Brown, San Salvador de Jujuy',
+            lat: -24.206949,
+            lon: -65.283522,
         }
     },
     {
@@ -261,7 +279,7 @@ export const productsData = [
         detalles: {
             tipo: 'Terreno',
             barrio: 'San Pablo de Reyes',
-            calle: 'Paraísos',
+            calle: 'Paleari',
             numero: '',
             mostrarDireccionExacta: false,
             superficie_m2: 450,
@@ -270,7 +288,9 @@ export const productsData = [
             antiguedad: 0,
             servicios: ['Agua Potable', 'Electricidad'],
             adicionales: ['Cerramiento perimetral'],
-            mapaQuery: 'San Pablo de Reyes, Jujuy'
+            mapaQuery: 'San Pablo de Reyes, Jujuy',
+            lat: -24.147730,
+            lon: -65.393570,
         }
     },
     {
@@ -299,7 +319,9 @@ export const productsData = [
             antiguedad: 25,
             servicios: ['Agua Potable', 'Cloaca', 'Gas Natural', 'Electricidad', 'Pavimento'],
             adicionales: ['Jardín'],
-            mapaQuery: 'José de la Iglesia 1500, Cuyaya, San Salvador de Jujuy'
+            mapaQuery: 'José de la Iglesia 1500, Cuyaya, San Salvador de Jujuy',
+            lat: -24.190771,
+            lon: -65.309181,
         }
     },
     {
@@ -316,7 +338,7 @@ export const productsData = [
         detalles: {
             tipo: 'Departamento',
             barrio: 'San Pedrito',
-            calle: 'Alvear',
+            calle: 'Leopoldo Barcena',
             numero: '',
             mostrarDireccionExacta: false,
             superficie_m2: 75,
@@ -327,7 +349,9 @@ export const productsData = [
             expensas: 9000,
             servicios: ['Agua Potable', 'Cloaca', 'Gas Natural', 'Electricidad', 'Pavimento'],
             adicionales: [],
-            mapaQuery: 'Barrio San Pedrito, San Salvador de Jujuy'
+            mapaQuery: 'Barrio San Pedrito, San Salvador de Jujuy',
+            lat: -24.207937,
+            lon: -65.270275,
         }
     },
     {
@@ -355,7 +379,9 @@ export const productsData = [
             antiguedad: 18,
             servicios: ['Agua Potable', 'Cloaca', 'Gas Natural', 'Electricidad', 'Pavimento'],
             adicionales: [],
-            mapaQuery: 'General La Madrid 400, Centro, San Salvador de Jujuy'
+            mapaQuery: 'General La Madrid 400, Centro, San Salvador de Jujuy',
+            lat: -24.184427,
+            lon: -65.306942,
         }
     },
     {
@@ -381,7 +407,9 @@ export const productsData = [
             antiguedad: 3,
             servicios: ['Agua Potable', 'Electricidad', 'Pavimento'],
             adicionales: ['Cerramiento perimetral'],
-            mapaQuery: 'Barrio Alto Comedero, San Salvador de Jujuy'
+            mapaQuery: 'Barrio Alto Comedero, San Salvador de Jujuy',
+            lat: -24.243660,
+            lon: -65.263271,
         }
     },
     {
@@ -409,7 +437,9 @@ export const productsData = [
             expensas: 7500,
             servicios: ['Agua Potable', 'Cloaca', 'Electricidad', 'Pavimento'],
             adicionales: [],
-            mapaQuery: 'Senador Pérez 200, Centro, San Salvador de Jujuy'
+            mapaQuery: 'Senador Pérez 200, Centro, San Salvador de Jujuy',
+            lat: -24.187938,
+            lon: -65.307949,
         }
     },
     {
@@ -426,7 +456,7 @@ export const productsData = [
         detalles: {
             tipo: 'Terreno',
             barrio: 'Yala',
-            calle: 'Camino Real',
+            calle: 'Obispo Padilla',
             numero: '',
             mostrarDireccionExacta: false,
             superficie_m2: 800,
@@ -435,7 +465,9 @@ export const productsData = [
             antiguedad: 0,
             servicios: ['Agua Potable', 'Electricidad'],
             adicionales: ['Cerramiento perimetral'],
-            mapaQuery: 'Yala, Jujuy'
+            mapaQuery: 'Yala, Jujuy',
+            lat: -24.120164,
+            lon: -65.400652,
         }
     },
     {
@@ -454,7 +486,7 @@ export const productsData = [
         detalles: {
             tipo: 'Casa',
             barrio: 'Bajo La Viña',
-            calle: 'Las Viñas',
+            calle: 'La Herradura',
             numero: '',
             mostrarDireccionExacta: false,
             superficie_m2: 320,
@@ -466,7 +498,9 @@ export const productsData = [
             antiguedad: 4,
             servicios: ['Agua Potable', 'Cloaca', 'Gas Natural', 'Electricidad', 'Pavimento'],
             adicionales: ['Jardín', 'Cerramiento perimetral'],
-            mapaQuery: 'Barrio Bajo La Viña, San Salvador de Jujuy'
+            mapaQuery: 'Barrio Bajo La Viña, San Salvador de Jujuy',
+            lat: -24.178395,
+            lon: -65.283515,
         }
     },
 ]
