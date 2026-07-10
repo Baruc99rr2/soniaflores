@@ -6,7 +6,7 @@ export const categoryItem = [
 
 export const productsData = [
     {
-        id: 1,
+        id: 2525,
         images: [
           '/propiedades/kid1.1.jpg', 
           '/propiedades/kid1.1.jpg', 

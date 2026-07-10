@@ -74,7 +74,7 @@ const ProductCard = ({ product }) => {
           <h4 className="property-card-title text-sm md:text-base font-bold text-gray-900 line-clamp-1 leading-tight mb-1 transition-colors duration-300">{product.name}</h4>
           
           <div className="flex items-center gap-3 text-xs text-gray-500 my-2 py-1 border-b border-gray-100/70">
-            <span className="flex items-center gap-1"><BiBed className="text-sm text-gray-600" /> <span className="font-medium">{product.detalles?.habitaciones || 0} Dorm.</span></span>
+            <span className="flex items-center gap-1"><BiBed className="text-sm text-gray-600" /> <span className="font-medium">{product.detalles?.dormitorios || 0} Dorm.</span></span>
             <span className="flex items-center gap-1"><MdOutlineBathtub className="text-sm text-gray-600" /> <span className="font-medium">{product.detalles?.banos || 0} Baños</span></span>
             <span className="flex items-center gap-1"><BiArea className="text-sm text-gray-600" /> <span className="font-medium">{product.detalles?.superficie_m2 || 0} m²</span></span>
           </div>

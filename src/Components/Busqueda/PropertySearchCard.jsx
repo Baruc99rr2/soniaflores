@@ -105,7 +105,9 @@ const PropertySearchCard = ({
         
         <div className="flex items-center justify-between mt-4">
           <div className="font-extrabold text-lg text-gray-900">
-            {product.price > 0 ? `USD ${new Intl.NumberFormat('es-AR').format(product.price)}` : 'A consultar'}
+            {product.price > 0 
+              ? `USD ${new Intl.NumberFormat('es-AR').format(product.price)}${product.category === 'Alquiler' ? ' / mes' : ''}` 
+              : 'A consultar'}
           </div>
           <Link 
             to={`/product/${product.id}`} 
