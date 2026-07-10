@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { BiMenu, BiX } from 'react-icons/bi'
 import { useNavigate, useLocation } from 'react-router-dom'
+
 // IMPORTACIÓN DE LOS DOS LOGOS
 import SoniaLogo from '../assets/SoniaLogo.png'   
 import SoniaLogo2 from '../assets/SoniaLogo2.png' 
@@ -9,45 +10,32 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  // Estado para controlar qué ítem móvil está activo momentáneamente al tocarlo
   const [activeMobileItem, setActiveMobileItem] = useState(null);
 
   const navigate = useNavigate(); 
   const location = useLocation(); 
 
   // ==========================================
-  // PARÁMETROS CONFIGURABLES DE DISEÑO (A OJO)
+  // PARÁMETROS CONFIGURABLES DE DISEÑO
   // ==========================================
   const LOGO_SIZE = {
-    // Tamaño del logo cuando la barra está arriba (Expandido)
     heightDesktop: "90px", 
     heightMobile: "80px",
-    
-    // Tamaño del logo cuando se achica al scrollear (Comprimido)
     heightDesktopCompressed: "70px",
     heightMobileCompressed: "50px"
   };
 
-  // CONTROL DEL TAMAÑO VERTICAL DEL NAVBAR (PADDINGS)
   const NAVBAR_PADDING = {
-    // Cuando el navbar está arriba (Expandido)
-    desktopExpanded: "py-3",  // Antes era py-6 (Se redujo para hacerlo más compacto)
+    desktopExpanded: "py-3",  
     mobileExpanded: "py-3",
-
-    // Cuando el navbar se comprime al hacer scroll
-    desktopCompressed: "py-1.3", // Antes era py-3
+    desktopCompressed: "py-1.3", 
     mobileCompressed: "py-1"
   };
   // ==========================================
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    const handleResize = () => setWindowWidth(window.innerWidth);
 
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", handleResize);
@@ -58,8 +46,8 @@ const Navbar = () => {
     };
   }, []);
 
-  // Función dedicada para navegar hacia la página de búsqueda
-  const navigateToSearch = (tipoFiltro = null, itemName = null) => {
+  // Función para ir a Búsqueda con filtro de categoría
+  const navigateToSearch = (category = null, itemName = null) => {
     if (isResponsiveMode && itemName) {
       setActiveMobileItem(itemName);
     }
@@ -67,41 +55,40 @@ const Navbar = () => {
     setTimeout(() => {
       setIsOpen(false);
       setActiveMobileItem(null);
-      
-      // Navegamos a la ruta de búsqueda
-      navigate('/busqueda');
-      
-      // Opcional: Si querés forzar un scroll up al entrar a búsqueda
+
+      if (category) {
+        // Pasamos el filtro por estado al navegar
+        navigate('/busqueda', { 
+          state: { 
+            prefilter: category 
+          } 
+        });
+      } else {
+        navigate('/busqueda');
+      }
+
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, isResponsiveMode && itemName ? 250 : 0);
   };
 
   const scrollToSection = (id, itemName = null) => {
-    // Si queremos ir al Inicio / Home completo
-    if (id === 'home' && location.pathname !== '/') {
-      setIsOpen(false);
-      navigate('/');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
-
-    // Si estamos en móvil, activamos la línea visual del ítem seleccionado
     if (isResponsiveMode && itemName) {
       setActiveMobileItem(itemName);
     }
 
-    // Esperamos un momento breve para que el usuario note el feedback visual antes de cerrar/redirigir
     setTimeout(() => {
       setIsOpen(false);
-      setActiveMobileItem(null); // Desaparece la línea inmediatamente después de cerrar
+      setActiveMobileItem(null);
 
-      if (!id) return;
+      if (id === 'home' && location.pathname !== '/') {
+        navigate('/');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
 
       if (location.pathname !== '/') {
         navigate('/');
-        setTimeout(() => {
-          executeScroll(id);
-        }, 100);
+        setTimeout(() => executeScroll(id), 100);
       } else {
         executeScroll(id);
       }
@@ -109,17 +96,10 @@ const Navbar = () => {
   };
 
   const executeScroll = (id) => {
-    if (id === 'home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      const element = document.getElementById(id);
-      if (element) {
-        const offset = element.offsetTop - 80; 
-        window.scrollTo({
-          top: offset,
-          behavior: 'smooth'
-        });
-      }
+    const element = document.getElementById(id);
+    if (element) {
+      const offset = element.offsetTop - 80; 
+      window.scrollTo({ top: offset, behavior: 'smooth' });
     }
   };
 
@@ -127,7 +107,6 @@ const Navbar = () => {
   const isHomePage = location.pathname === '/';
   const isTransparentActive = isHomePage && !isScrolled;
 
-  // Lógica de inyección dinámica de paddings basados en los parámetros superiores
   const currentPadding = isTransparentActive
     ? (isResponsiveMode ? NAVBAR_PADDING.mobileExpanded : NAVBAR_PADDING.desktopExpanded)
     : (isResponsiveMode ? NAVBAR_PADDING.mobileCompressed : NAVBAR_PADDING.desktopCompressed);
@@ -136,10 +115,8 @@ const Navbar = () => {
     ? `bg-transparent ${currentPadding} text-white` 
     : `bg-[#d64531] shadow-xl ${currentPadding} text-white border-b border-white/10`;
 
-  // Clase para PC: Línea fluida SOLO al pasar el mouse (hover), grosor normal (font-normal)
   const navLinkDesktopClass = "relative overflow-hidden pb-1 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-left after:scale-x-0 after:bg-white after:transition-transform after:duration-300 after:ease-in-out hover:after:scale-x-100 cursor-pointer text-white font-normal uppercase tracking-wider text-sm lg:text-base select-none";
 
-  // Clase para Móvil: Sin hover pegajoso, la línea se controla manualmente con una clase activa temporal
   const navLinkMobileClass = (itemName) => {
     const isActive = activeMobileItem === itemName;
     return `relative overflow-hidden pb-1 cursor-pointer text-white font-normal uppercase tracking-wider text-base select-none after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-white after:transition-transform after:duration-300 after:ease-in-out ${
@@ -148,7 +125,6 @@ const Navbar = () => {
   };
 
   const renderLogoContainer = () => {
-    // Calculamos el alto dinámico según el dispositivo y si hay scroll
     let currentHeight = LOGO_SIZE.heightDesktop;
     if (isResponsiveMode) {
       currentHeight = isScrolled ? LOGO_SIZE.heightMobileCompressed : LOGO_SIZE.heightMobile;
@@ -160,12 +136,8 @@ const Navbar = () => {
       <div 
         onClick={() => scrollToSection('home')} 
         className="relative flex items-center justify-center cursor-pointer select-none transition-all duration-500 ease-in-out"
-        style={{
-          width: isScrolled ? "80px" : "180px",
-          height: currentHeight
-        }}
+        style={{ width: isScrolled ? "80px" : "180px", height: currentHeight }}
       >
-        {/* LOGO 1: Completo */}
         <img
           src={SoniaLogo}
           alt="Sonia Flores Inmobiliaria"
@@ -173,8 +145,6 @@ const Navbar = () => {
             isScrolled ? "opacity-0 scale-75 pointer-events-none" : "opacity-100 scale-100"
           }`}
         />
-
-        {/* LOGO 2: Solo Isotipo */}
         <img
           src={SoniaLogo2}
           alt="Sonia Flores"
@@ -194,8 +164,6 @@ const Navbar = () => {
           {/* MODO DESKTOP */}
           {!isResponsiveMode ? (
             <div className="flex items-center justify-between w-full">
-              
-              {/* Bloque Izquierdo (Ventas, Alquiler, Busqueda) */}
               <ul className="flex items-center space-x-6 lg:space-x-8 w-1/2 justify-end pr-6 lg:pr-10">
                 <li onClick={() => navigateToSearch('Venta')} className={navLinkDesktopClass}>
                   Ventas
@@ -208,10 +176,8 @@ const Navbar = () => {
                 </li>
               </ul>
 
-              {/* LOGO CENTRAL */}
               {renderLogoContainer()}
 
-              {/* Bloque Derecho (Sobre Nosotros, Servicios, Contacto) */}
               <ul className="flex items-center space-x-6 lg:space-x-8 w-1/2 justify-start pl-6 lg:pl-10">
                 <li onClick={() => scrollToSection('about-section')} className={navLinkDesktopClass}>
                   Sobre Nosotros
@@ -223,13 +189,11 @@ const Navbar = () => {
                   Contacto
                 </li>
               </ul>
-
             </div>
           ) : (
-            // MODO RESPONSIVO (MÓVIL)
+            // MODO MÓVIL
             <div className="flex justify-between items-center w-full">
               {renderLogoContainer()}
-              
               <button 
                 className="text-3xl focus:outline-none transition-transform duration-200 active:scale-95 text-white" 
                 onClick={() => setIsOpen(!isOpen)}
@@ -239,7 +203,7 @@ const Navbar = () => {
             </div>
           )}
 
-          {/* MENÚ DESPLEGABLE RESPONSIVO (MÓVIL) */}
+          {/* MENÚ MÓVIL */}
           {isResponsiveMode && (
             <div className={`absolute top-full left-0 w-full bg-[#d64531] shadow-2xl transition-all duration-300 flex flex-col items-center space-y-6 py-8 border-t border-white/10 ${
               isOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2 pointer-events-none"

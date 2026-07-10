@@ -39,8 +39,8 @@ const PropertySearchCard = ({
       {/* Imagen */}
       <div className={`relative overflow-hidden bg-gray-100 shrink-0 flex items-center justify-center ${
         isGrid 
-          ? "h-[165px] md:h-[175px]" 
-          : "w-full sm:w-[230px] h-[195px] sm:h-[168px]"   // ← Altura controlada en lista
+          ? "h-[165px] md:h-[175px] max-[320px]:h-[138px]" 
+          : "w-full sm:w-[230px] h-[195px] sm:h-[168px]"
       }`}>
         <img 
           src={images[currentImgIndex]} 
@@ -48,18 +48,18 @@ const PropertySearchCard = ({
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
           loading="lazy" 
         />
-        
+
         {images.length > 1 && (
           <>
             <button 
               onClick={(e) => changeSlide(e, "prev")} 
-              className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full p-1.5 opacity-0 group-hover:opacity-100 transition-all z-10"
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-all z-10"
             >
               <MdChevronLeft size={20} />
             </button>
             <button 
               onClick={(e) => changeSlide(e, "next")} 
-              className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full p-1.5 opacity-0 group-hover:opacity-100 transition-all z-10"
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-all z-10"
             >
               <MdChevronRight size={20} />
             </button>
@@ -67,47 +67,45 @@ const PropertySearchCard = ({
         )}
 
         <div className="absolute top-3 left-3 z-20 flex flex-wrap gap-1">
-          <span className="text-[10px] font-bold text-gray-900 bg-white/95 px-2 py-1 rounded shadow-md uppercase">
+          <span className="text-[10px] max-[320px]:text-[9px] font-bold text-gray-900 bg-white/95 px-2 py-1 rounded shadow-md uppercase">
             {product.category || "VENTA"}
           </span>
-          {isInversion && <span className="text-[10px] font-bold text-white bg-amber-500 px-2 py-1 rounded shadow-md uppercase">Inversión</span>}
-          {isNuevo && <span className="text-[10px] font-bold text-white bg-emerald-600 px-2 py-1 rounded shadow-md uppercase">Nuevo</span>}
+          {isInversion && <span className="text-[10px] max-[320px]:text-[9px] font-bold text-white bg-amber-500 px-2 py-1 rounded shadow-md uppercase">Inversión</span>}
+          {isNuevo && <span className="text-[10px] max-[320px]:text-[9px] font-bold text-white bg-emerald-600 px-2 py-1 rounded shadow-md uppercase">Nuevo</span>}
         </div>
       </div>
 
       {/* Información */}
-      <div className="flex-1 p-4 flex flex-col justify-between min-h-0">
+      <div className="flex-1 p-4 max-[320px]:p-3 flex flex-col justify-between">
         <div>
           <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-1 text-[11px] font-semibold text-gray-400 uppercase truncate">
+            <div className="flex items-center gap-1 text-[11px] max-[320px]:text-[10px] font-semibold text-gray-400 uppercase truncate">
               <MdLocationOn className="text-red-500 flex-shrink-0" />
               {product.detalles?.barrio || "Ubicación"}
             </div>
-            <span className="text-[10px] font-bold text-gray-600 bg-gray-100 px-2 py-0.5 rounded uppercase">
+            <span className="text-[10px] max-[320px]:text-[9px] font-bold text-gray-600 bg-gray-100 px-2 py-0.5 rounded uppercase">
               {product.detalles?.tipo || "Inmueble"}
             </span>
           </div>
 
-          <h3 className="text-sm md:text-base font-bold text-gray-900 line-clamp-2 leading-tight mb-3 group-hover:text-red-600 transition-colors">
+          <h3 className="text-sm max-[320px]:text-xs font-bold text-gray-900 line-clamp-2 leading-tight mb-3 group-hover:text-red-600 transition-colors">
             {product.name}
           </h3>
 
-          <div className="flex items-center gap-4 text-xs text-gray-500">
+          <div className="flex items-center gap-4 text-xs max-[320px]:text-[13px] text-gray-600">
             {!isTerreno && (
               <>
-                <span className="flex items-center gap-1"><MdBed className="text-gray-600" /> {product.detalles?.dormitorios || 0}</span>
-                <span className="flex items-center gap-1"><MdBathtub className="text-gray-600" /> {product.detalles?.banos || 0}</span>
+                <span className="flex items-center gap-1"><MdBed className="text-xl max-[320px]:text-lg" /> {product.detalles?.dormitorios || 0}</span>
+                <span className="flex items-center gap-1"><MdBathtub className="text-xl max-[320px]:text-lg" /> {product.detalles?.banos || 0}</span>
               </>
             )}
-            <span className="flex items-center gap-1"><MdSquareFoot className="text-gray-600" /> {product.detalles?.superficie_m2 || 0} m²</span>
+            <span className="flex items-center gap-1"><MdSquareFoot className="text-xl max-[320px]:text-lg" /> {product.detalles?.superficie_m2 || 0}</span>
           </div>
         </div>
         
         <div className="flex items-center justify-between mt-4">
-          <div className="font-extrabold text-lg text-gray-900">
-            {product.price > 0 
-              ? `USD ${new Intl.NumberFormat('es-AR').format(product.price)}${product.category === 'Alquiler' ? ' / mes' : ''}` 
-              : 'A consultar'}
+          <div className="font-extrabold text-lg max-[320px]:text-base text-gray-900">
+            {product.price > 0 ? `USD ${new Intl.NumberFormat('es-AR').format(product.price)}` : 'A consultar'}
           </div>
           <Link 
             to={`/product/${product.id}`} 

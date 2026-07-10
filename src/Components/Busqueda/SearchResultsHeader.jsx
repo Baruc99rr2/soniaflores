@@ -9,19 +9,19 @@ const SearchResultsHeader = ({
   setViewMode
 }) => {
   return (
-    <div className="flex flex-wrap items-center justify-between gap-4 border-b border-gray-200 pb-3 mb-4">
+    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 pb-4 mb-6">
       {/* Cantidad de resultados */}
       <div className="text-sm font-semibold text-gray-700">
         {sortedProducts.length} Resultados encontrados
       </div>
 
-      {/* Controles de orden y vista */}
-      <div className="flex items-center gap-4">
+      {/* Controles */}
+      <div className="flex flex-wrap items-center gap-3">
         {/* Ordenamiento */}
         <select 
           value={sortBy} 
           onChange={(e) => setSortBy(e.target.value)} 
-          className="bg-white border border-gray-200 rounded-md py-1.5 px-3 text-xs focus:outline-none text-gray-700"
+          className="bg-white border border-gray-200 rounded-lg py-2 px-3 text-sm focus:outline-none text-gray-700 min-w-[160px]"
         >
           <option value="default">Orden por defecto</option>
           <option value="price-asc">Precio: Menor a Mayor</option>
@@ -30,26 +30,26 @@ const SearchResultsHeader = ({
           <option value="antiguedad">Antigüedad</option>
         </select>
 
-        {/* Cambio de vista (Lista / Grid) */}
-        <div className="flex items-center border border-gray-200 rounded-md p-0.5 bg-gray-100/70">
+        {/* Botones de Vista (Lista / Grid) */}
+        <div className="flex items-center border border-gray-200 rounded-lg p-1 bg-gray-100">
           <button 
             onClick={() => setViewMode("list")} 
-            className={`p-2 rounded transition-colors ${viewMode === "list" 
+            className={`p-2.5 rounded-md transition-all ${viewMode === "list" 
               ? 'bg-white text-red-600 shadow-sm' 
               : 'text-gray-500 hover:text-gray-700'}`}
             title="Vista Lista"
           >
-            <MdViewList className="text-xl" />
+            <MdViewList className="text-2xl" />
           </button>
           
           <button 
             onClick={() => setViewMode("grid")} 
-            className={`p-2 rounded transition-colors ${viewMode === "grid" 
+            className={`p-2.5 rounded-md transition-all ${viewMode === "grid" 
               ? 'bg-white text-red-600 shadow-sm' 
               : 'text-gray-500 hover:text-gray-700'}`}
             title="Vista Cuadrícula"
           >
-            <MdViewModule className="text-xl" />
+            <MdViewModule className="text-2xl" />
           </button>
         </div>
       </div>

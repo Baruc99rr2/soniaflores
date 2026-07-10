@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { productsData } from "../../data";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import SearchFilters from "./SearchFilters";
 import MobileFiltersModal from "./MobileFiltersModal";
@@ -11,6 +11,7 @@ import PaginationControls from "./PaginationControls";
 
 const Busqueda = () => {
   const navigate = useNavigate();
+  const location = useLocation();   // ← Nuevo
   const products = productsData;
 
   // Estados principales
@@ -55,6 +56,20 @@ const Busqueda = () => {
     setActiveFilters(cleared);
     setCurrentPage(1);
   };
+
+  // Aplicar filtro predefinido desde el Navbar (Venta / Alquiler)
+  useEffect(() => {
+    const prefilter = location.state?.prefilter;
+    
+    if (prefilter) {
+      setFormInputs(prev => ({ ...prev, estado: prefilter }));
+      setActiveFilters(prev => ({ ...prev, estado: prefilter }));
+      setCurrentPage(1);
+      
+      // Limpiar el state para evitar que se aplique de nuevo al recargar
+      navigate(location.pathname, { replace: true, state: {} });
+    }
+  }, [location.state, navigate]);
 
   // Filtrado
   const filteredProducts = useMemo(() => {
@@ -108,6 +123,22 @@ const Busqueda = () => {
         isAdvancedOpen={isAdvancedOpen}
         setIsAdvancedOpen={setIsAdvancedOpen}
       />
+
+      {/* Trigger de Filtros Móviles */}
+      <div className="block md:hidden w-full bg-white border-b border-gray-200 p-4">
+        <div 
+          onClick={() => setIsMobileFiltersOpen(true)} 
+          className="w-full flex items-center gap-3 px-5 py-3.5 bg-gray-50 border border-gray-200 rounded-2xl text-sm text-gray-600 cursor-pointer hover:bg-gray-100 transition-colors"
+        >
+          <div className="flex-1 flex items-center gap-2">
+            <span className="text-xl">🔍</span>
+            <span className="font-medium">Buscar propiedades...</span>
+          </div>
+          <div className="text-red-600">
+            <span className="text-xl">⚙️</span>
+          </div>
+        </div>
+      </div>
 
       <div className="w-full grid grid-cols-1 lg:grid-cols-10">
         {/* Mapa */}
