@@ -6,10 +6,10 @@
         {
           "type": "header",
           "key": "user-agent",
-          "value": ".*(facebookexternalhit|twitterbot|googlebot|bingbot|linkedinbot|embedly|Prerender|prerender|PrerenderBot|renderbot|bot).*"
+          "value": "(facebookexternalhit|Twitterbot|twitterbot|LinkedInBot|linkedinbot|embedly|baiduspider|bingbot|googlebot|Prerender|prerender|PrerenderBot|renderbot|bot|Bot)"
         }
       ],
-      "destination": "https://service.prerender.io/https://soniaflores.vercel.app/$1"
+      "destination": "https://service.prerender.io/https://soniaflores.vercel.app/:1"
     },
     {
       "source": "/(.*)",
