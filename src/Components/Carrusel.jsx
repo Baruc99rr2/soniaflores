@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef, useMemo } from "react";
 import { ShopContext } from "./ShopContext";
 import { Link } from "react-router-dom";
 import { MdLocationOn } from 'react-icons/md';
@@ -10,7 +10,7 @@ import { RippleButton, RippleButtonRipples } from './RippleButton';
 // 1. IMPORTACIÓN DEL FONDO DESDE TU RUTA REAL (src/Components/bubble.jsx)
 import { BubbleBackground } from './bubble';
 
-// 2. TU COMPONENTE EXACTO (Adaptado a JS tradicional eliminando los tipos de TS si usas .jsx)
+// 2. TU COMPONENTE EXACTO optimizado para desactivar interactividad si es móvil
 const BubbleBackgroundDemo = ({ interactive }) => {
   return (
     <BubbleBackground
@@ -20,43 +20,45 @@ const BubbleBackgroundDemo = ({ interactive }) => {
   );
 };
 
-// COMPONENTE AUXILIAR PARA EL EFECTO DE DESLIZAMIENTO AL CARGAR
+// COMPONENTE AUXILIAR OPTIMIZADO PARA EL EFECTO DE DESLIZAMIENTO AL CARGAR
 const ScrollReveal = ({ children, delay = "delay-0" }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const domRef = React.useRef();
+  const domRef = useRef();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-            observer.unobserve(entry.target);
-          }
-        });
+        const [entry] = entries;
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
       },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+      { threshold: 0.05, rootMargin: "0px 0px -20px 0px" } // Margen más seguro para móviles
     );
 
-    if (domRef.current) observer.observe(domRef.current);
+    const currentRef = domRef.current;
+    if (currentRef) observer.observe(currentRef);
+    
     return () => {
-      if (domRef.current) observer.unobserve(domRef.current);
+      if (currentRef) observer.unobserve(currentRef);
     };
   }, []);
 
   return (
     <div
       ref={domRef}
-      className={`transform transition-all duration-1000 ease-out ${delay} ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+      className={`transform transition-all duration-700 ease-out ${delay} ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
       }`}
+      style={{ willChange: "transform, opacity" }} // Prepara al navegador para la transición
     >
       {children}
     </div>
   );
 };
 
-// TARJETA DE PROPIEDAD ESTILO BANNER 3D
+// TARJETA DE PROPIEDAD ESTILO BANNER 3D (Optimizada sin filtros pesados en móviles)
 const ProductCard = ({ product, dimensions, index, totalItems }) => {
   const displayImage = product.images && product.images.length > 0 ? product.images[0] : '/propiedades/unisex.jpg';
 
@@ -68,26 +70,38 @@ const ProductCard = ({ product, dimensions, index, totalItems }) => {
     (parseInt(dimensions.width) / 2) / Math.tan((anglePerItem / 2) * Math.PI / 180) + 10
   );
 
+  // Validación de precio para evitar NaN y aplicar formato en pesos
+  const hasValidPrice = product.price !== undefined && product.price !== null && !isNaN(product.price) && product.price !== '';
+  
+  let priceText = "A consultar";
+  if (hasValidPrice) {
+    const formattedPrice = new Intl.NumberFormat('es-AR').format(product.price);
+    priceText = product.category === 'Alquiler' ? `$ ${formattedPrice} / mes` : `$ ${formattedPrice}`;
+  }
+
   return (
     <div 
-      className="absolute inset-0 rounded-xl overflow-hidden shadow-2xl select-none group transition-all duration-300 bg-black/30 backdrop-blur-xs border border-white/10"
+      className="absolute inset-0 rounded-xl overflow-hidden shadow-xl select-none group bg-black/45 border border-white/10"
       style={{
         width: dimensions.width,
         height: dimensions.height,
         transform: `rotateY(${currentAngle}deg) translateZ(${radius}px)`,
-        transformStyle: "preserve-3d"
+        transformStyle: "preserve-3d",
+        willChange: "transform", // Forzar aceleración por hardware (GPU)
+        backfaceVisibility: "hidden",
+        WebkitBackfaceVisibility: "hidden"
       }}
     >
       <img
         src={displayImage}
         alt={product.name}
-        className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none transition-all duration-700 group-hover:scale-105 opacity-75"
+        className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none transition-transform duration-500 group-hover:scale-105 opacity-70"
         loading="lazy"
       />
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-black/20 pointer-events-none" />
 
-      <div className="absolute inset-0 p-4 md:p-5 flex flex-col justify-between items-start text-white z-10">
+      <div className="absolute inset-0 p-4 md:p-5 flex flex-col justify-between items-start text-white z-10" style={{ transform: "translateZ(1px)" }}>
         <div className="w-full text-left flex justify-between items-start gap-2">
           <div>
             <span className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-red-400 bg-black/50 px-2 py-0.5 rounded border border-red-500/30">
@@ -101,7 +115,7 @@ const ProductCard = ({ product, dimensions, index, totalItems }) => {
           </div>
         </div>
 
-        <div className="w-full mt-auto mb-3">
+        <div className="w-full mt-auto mb-2">
           <h4 className="text-xs md:text-base font-semibold text-white drop-shadow-md line-clamp-2 leading-tight">
             {product.name}
           </h4>
@@ -110,6 +124,10 @@ const ProductCard = ({ product, dimensions, index, totalItems }) => {
               <MdLocationOn className="text-red-500 text-xs" /> {product.detalles.barrio}
             </p>
           )}
+          {/* Añadido el precio en la tarjeta */}
+          <p className="text-xs md:text-sm font-bold text-red-400 mt-1">
+            {priceText}
+          </p>
         </div>
 
         <div className="w-full flex justify-between items-center border-t border-white/10 pt-2">
@@ -136,21 +154,35 @@ const ProductCard = ({ product, dimensions, index, totalItems }) => {
   );
 };
 
-// COMPONENTE PRINCIPAL CON ENTORNO 3D CONTROLADO POR BOTONES
+// COMPONENTE PRINCIPAL CON ENTORNO 3D OPTIMIZADO
 const Carrusel = () => {
   const { products } = useContext(ShopContext);
   const [activeIndex, setActiveIndex] = useState(0);
   const [width, setWidth] = useState(window.innerWidth);
 
   useEffect(() => {
-    const handleResize = () => setWidth(window.innerWidth);
+    let timeoutId;
+    const handleResize = () => {
+      // Debounce simple para evitar recalcular dimensiones constantemente al girar el celular
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        setWidth(window.innerWidth);
+      }, 150);
+    };
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   const isMobile = width < 640;
 
-  const baseProducts = products && products.length > 0 ? products.slice(-7) : [];
+  // Memorizamos los productos recortados para evitar operaciones redundantes en renderizados rápidos
+  const baseProducts = useMemo(() => {
+    return products && products.length > 0 ? products.slice(-7) : [];
+  }, [products]);
+
   const totalItems = baseProducts.length;
   const anglePerItem = totalItems > 0 ? 360 / totalItems : 0;
 
@@ -165,12 +197,11 @@ const Carrusel = () => {
   const currentRotation = activeIndex * -anglePerItem;
 
   const cardDimensions = {
-    width: isMobile ? "200px" : "290px",
-    height: isMobile ? "240px" : "320px"
+    width: isMobile ? "190px" : "290px", // Un pelín más pequeño en móviles para optimizar cálculo de área
+    height: isMobile ? "230px" : "320px"
   };
 
   return (
-    /* 3. CONTENEDOR PRINCIPAL CON LOS COLORES BASE (Atenuado para favorecer el resalte del Canvas) */
     <div 
       id="recommendations-section" 
       className="relative w-full pt-24 pb-40 overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-black animate-gradient-slow"
@@ -179,9 +210,9 @@ const Carrusel = () => {
       }}
     >
       
-      {/* 4. INYECCIÓN CORREGIDA DEL COMPONENTE DE BURBUJAS (Sin filtros que distorsionen la paleta) */}
-      <div className="absolute inset-0 pointer-events-none z-0 opacity-80">
-        <BubbleBackgroundDemo interactive={true} />
+      {/* Desactivamos interactividad en celular para bajar radicalmente el uso de CPU */}
+      <div className="absolute inset-0 pointer-events-none z-0 opacity-70">
+        <BubbleBackgroundDemo interactive={!isMobile} />
       </div>
 
       {/* SECCIÓN TITULO */}
@@ -206,26 +237,27 @@ const Carrusel = () => {
         </ScrollReveal>
       </div>
 
-      {/* ESCENARIO TRIDIMENSIONAL DEL CARRUSEL Y CONTROLES INTERACTIVOS */}
+      {/* ESCENARIO TRIDIMENSIONAL */}
       <ScrollReveal delay="delay-100">
         <div className="relative max-w-6xl mx-auto px-4 mt-20 flex flex-col items-center justify-center gap-8">
           
           <div 
             className="relative w-full flex items-center justify-center z-10"
             style={{ 
-              perspective: "1400px",
+              perspective: isMobile ? "1000px" : "1400px", // Menor perspectiva en móviles reduce distorsión matemática
               perspectiveOrigin: "50% 35%",
-              height: isMobile ? "260px" : "360px"
+              height: isMobile ? "250px" : "360px"
             }}
           >
             {totalItems > 0 ? (
               <div 
-                className="relative flex items-center justify-center transition-transform duration-700 ease-out select-none"
+                className="relative flex items-center justify-center transition-transform duration-500 ease-out select-none" // Duración reducida de 700ms a 500ms para más fluidez reactiva
                 style={{
                   width: cardDimensions.width,
                   height: cardDimensions.height,
                   transformStyle: "preserve-3d",
-                  transform: `rotateY(${currentRotation}deg)`
+                  transform: `rotateY(${currentRotation}deg)`,
+                  willChange: "transform" // Fuerza aceleración por GPU para la rotación global del cilindro
                 }}
               >
                 {baseProducts.map((product, index) => (

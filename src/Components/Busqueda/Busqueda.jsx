@@ -139,7 +139,6 @@ const Busqueda = () => {
           </div>
         </div>
       </div>
-
       <div className="w-full grid grid-cols-1 lg:grid-cols-10">
         {/* Mapa */}
         <div className="hidden lg:block lg:col-span-4 relative">

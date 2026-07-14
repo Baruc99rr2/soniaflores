@@ -42,8 +42,16 @@ const ScrollReveal = ({ children, delay = "delay-0" }) => {
 // TARJETA DE PROPIEDAD
 const ProductCard = ({ product }) => {
   const displayImage = product.images?.[0] || '/propiedades/unisex.jpg';
-  const formattedPrice = new Intl.NumberFormat('es-AR').format(product.price);
-  const priceText = product.category === 'Alquiler' ? `USD ${formattedPrice} / mes` : `USD ${formattedPrice}`;
+  
+  // Validación de precio para evitar NaN
+  const hasValidPrice = product.price !== undefined && product.price !== null && !isNaN(product.price) && product.price !== '';
+  
+  // Construcción del texto del precio en pesos o "A consultar"
+  let priceText = "A consultar";
+  if (hasValidPrice) {
+    const formattedPrice = new Intl.NumberFormat('es-AR').format(product.price);
+    priceText = product.category === 'Alquiler' ? `$ ${formattedPrice} / mes` : `$ ${formattedPrice}`;
+  }
 
   const getTypeIcon = (type) => {
     const key = type?.toLowerCase() || "";

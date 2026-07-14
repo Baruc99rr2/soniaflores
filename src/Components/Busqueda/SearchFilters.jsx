@@ -138,7 +138,7 @@ const SearchFilters = ({
           </div>
 
           <div>
-            <label className="text-[11px] font-bold text-gray-400 uppercase block mb-1">Precio Mín (USD)</label>
+            <label className="text-[11px] font-bold text-gray-400 uppercase block mb-1">Precio Mín</label>
             <input 
               type="number" 
               placeholder="Mínimo" 
@@ -149,7 +149,7 @@ const SearchFilters = ({
           </div>
 
           <div>
-            <label className="text-[11px] font-bold text-gray-400 uppercase block mb-1">Precio Max (USD)</label>
+            <label className="text-[11px] font-bold text-gray-400 uppercase block mb-1">Precio Max</label>
             <input 
               type="number" 
               placeholder="Máximo" 

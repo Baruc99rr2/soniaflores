@@ -1,9 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  /* Registra Roboto como la fuente sans por defecto de Tailwind v4 */
+  --font-sans: "Roboto", sans-serif;
+}
+
+/* --- ESTILOS GENERALES Y PERSONALIZADOS --- */
 
 body {
     background-color: #eeecec;
+    font-family: 'Roboto', sans-serif; /* Resguardo para navegadores antiguos */
 }
-
-@import "tailwindcss";
 
 /* Oculta la barra de scroll nativa para que se vea limpio pero mantenga la física de arrastre */
 .scrollbar-none::-webkit-scrollbar {

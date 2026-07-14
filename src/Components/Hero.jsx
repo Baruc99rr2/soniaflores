@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import heroVideo from '../assets/hero-video.mp4';
 // IMPORTACIÓN DE ICONOS PARA LA INFO DE CONTACTO
 import { FaMapMarkerAlt, FaPhoneAlt } from 'react-icons/fa';
 
@@ -7,31 +6,39 @@ const Hero = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
+    let timeoutId;
     const handleResize = () => {
-      setWindowWidth(window.innerWidth);
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        setWindowWidth(window.innerWidth);
+      }, 150); // Evita ejecuciones excesivas en cambios de orientación de pantalla
     };
 
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
+      clearTimeout(timeoutId);
     };
   }, []);
 
-  // Breakpoint crítico de 1100px
   const isResponsiveMode = windowWidth < 1100;
+  const isMobile = windowWidth < 640;
 
   return (
     <div className={`relative min-h-screen flex flex-col items-center justify-center overflow-hidden ${isResponsiveMode ? 'pt-24 pb-12' : 'pt-0'}`}>
       
-      {/* 1. Video de Fondo */}
+      {/* 1. Video de Fondo (Ruta directa desde public y optimizado para streaming) */}
       <video
         autoPlay
         loop
         muted
         playsInline
+        preload="auto"
+        poster="/images/hero-poster.jpg" // <-- AGREGA UNA FOTO AQUÍ PARA EVITAR LA PANTALLA NEGRA
         className="absolute top-0 left-0 w-full h-full object-cover z-0"
+        style={{ willChange: "transform" }} // Fuerza aceleración por hardware
       >
-        <source src={heroVideo} type="video/mp4" />
+        <source src="/videos/hero-video.mp4" type="video/mp4" />
         Tu navegador no soporta videos integrados.
       </video>
 
@@ -48,13 +55,13 @@ const Hero = () => {
             Tu futuro empieza en la puerta de tu nuevo hogar
           </h1>
 
-          {/* Bloque de Datos de Contacto Inferior (Texto más chico) */}
-          <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-stone-200 text-xs sm:text-sm md:text-base font-light tracking-wide bg-black/20 px-5 py-3 sm:py-2 rounded-2xl sm:rounded-full backdrop-blur-sm border border-white/5 shadow-lg">
+          {/* Bloque de Datos de Contacto Inferior - Optimizado sin blur pesado en móviles */}
+          <div className={`mt-6 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-stone-200 text-xs sm:text-sm md:text-base font-light tracking-wide bg-black/40 sm:bg-black/20 px-5 py-3 sm:py-2 rounded-2xl sm:rounded-full border border-white/5 shadow-lg ${!isMobile ? 'backdrop-blur-xs' : ''}`}>
             
             {/* Ubicación */}
             <div className="flex items-center gap-2">
               <FaMapMarkerAlt className="text-red-500 shrink-0" />
-              <span>Independencia 1167, San Salvador de Jujuy, Argentina.</span>
+              <span>Independencia 1172, San Salvador de Jujuy, Argentina.</span>
             </div>
 
             {/* Separador visual para pantallas medianas/grandes */}

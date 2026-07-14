@@ -113,7 +113,7 @@ const Footer = () => {
             <div className='flex items-center gap-2'>
               <FaMapMarkerAlt className='text-red-500 shrink-0 text-sm' />
               <div>
-                <p className='text-white font-medium'>Independencia 1167</p>
+                <p className='text-white font-medium'>Independencia 1172</p>
                 <p className='text-[10px] text-gray-500'>Ubicación</p>
               </div>
             </div>

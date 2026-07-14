@@ -88,7 +88,7 @@ const PropertyMap = ({
       const finalCoords = [lat, lon];
 
       const textoPrecio = prop.price > 0 
-        ? `USD ${new Intl.NumberFormat('es-AR').format(prop.price)}` 
+        ? `$ ${new Intl.NumberFormat('es-AR').format(prop.price)}` 
         : 'A consultar';
 
       const customIcon = L.divIcon({

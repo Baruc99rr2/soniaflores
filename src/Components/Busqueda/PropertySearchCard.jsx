@@ -24,7 +24,6 @@ const PropertySearchCard = ({
   const isGrid = viewMode === "grid";
   const isTerreno = product.detalles?.tipo === "Terreno";
   const isInversion = isTerreno && product.category === "Venta";
-  const isNuevo = product.detalles?.antiguedad !== undefined && product.detalles.antiguedad <= 5;
 
   return (
     <div 
@@ -71,7 +70,6 @@ const PropertySearchCard = ({
             {product.category || "VENTA"}
           </span>
           {isInversion && <span className="text-[10px] max-[320px]:text-[9px] font-bold text-white bg-amber-500 px-2 py-1 rounded shadow-md uppercase">Inversión</span>}
-          {isNuevo && <span className="text-[10px] max-[320px]:text-[9px] font-bold text-white bg-emerald-600 px-2 py-1 rounded shadow-md uppercase">Nuevo</span>}
         </div>
       </div>
 
@@ -105,7 +103,7 @@ const PropertySearchCard = ({
         
         <div className="flex items-center justify-between mt-4">
           <div className="font-extrabold text-lg max-[320px]:text-base text-gray-900">
-            {product.price > 0 ? `USD ${new Intl.NumberFormat('es-AR').format(product.price)}` : 'A consultar'}
+            {product.price > 0 ? `$ ${new Intl.NumberFormat('es-AR').format(product.price)}` : 'A consultar'}
           </div>
           <Link 
             to={`/product/${product.id}`} 

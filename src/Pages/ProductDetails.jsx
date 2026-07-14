@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { productsData } from '../data';
-import { BiChevronLeft, BiChevronRight, BiBed, BiArea, BiHomeAlt, BiCar, BiCalendar, BiWater, BiBlanket, BiBuildingHouse, BiMap, BiShareAlt, BiLogoWhatsapp, BiLogoFacebook, BiLogoInstagram } from 'react-icons/bi';
+import { BiChevronLeft, BiChevronRight, BiBed, BiArea, BiHomeAlt, BiCar, BiWater, BiBlanket, BiBuildingHouse, BiMap, BiShareAlt, BiLogoWhatsapp, BiLogoFacebook, BiLogoInstagram } from 'react-icons/bi';
 import { IoMdClose } from 'react-icons/io';
-import { MdOutlineBathtub, MdLocationOn, MdOutlineLocalDrink, MdOutlineElectricBolt, MdOutlineGasMeter, MdOutlineSevereCold } from 'react-icons/md';
+import { MdOutlineBathtub, MdLocationOn, MdOutlineLocalDrink, MdOutlineElectricBolt, MdOutlineGasMeter, MdFullscreen } from 'react-icons/md';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
@@ -22,6 +22,7 @@ const ProductDetails = () => {
     const { id } = useParams();
     const [currentImgIndex, setCurrentImgIndex] = useState(0);
     const [isFullscreen, setIsFullscreen] = useState(false);
+    const [isMapFullscreen, setIsMapFullscreen] = useState(false);
 
     const product = productsData.find((p) => p.id === parseInt(id));
 
@@ -33,11 +34,12 @@ const ProductDetails = () => {
     ];
 
     const imagesList = product.images || [product.image];
-    const mainImage = imagesList[0]; // Primera imagen para Facebook
+    const mainImage = imagesList[0];
 
     const prevImage = (e) => { e?.stopPropagation(); setCurrentImgIndex(prev => prev === 0 ? imagesList.length - 1 : prev - 1); };
     const nextImage = (e) => { e?.stopPropagation(); setCurrentImgIndex(prev => prev === imagesList.length - 1 ? 0 : prev + 1); };
 
+    // Se removió Año de const. y Antigüedad
     const specs = [
         { icon: <BiBuildingHouse />, label: 'Tipo', value: product.detalles?.tipo || '-' },
         { icon: <BiHomeAlt />, label: 'Ambientes', value: product.detalles?.ambientes || '-' },
@@ -45,8 +47,6 @@ const ProductDetails = () => {
         { icon: <MdOutlineBathtub />, label: 'Baños', value: product.detalles?.banos || '-' },
         { icon: <BiArea />, label: 'm² Cubiertos', value: product.detalles?.superficie_m2 || '-' },
         { icon: <BiCar />, label: 'Cocheras', value: product.detalles?.cocheras || '0' },
-        { icon: <BiCalendar />, label: 'Año Const.', value: product.detalles?.anio || '2026' },
-        { icon: <MdOutlineSevereCold />, label: 'Antigüedad', value: product.detalles?.antiguedad ? `${product.detalles.antiguedad} años` : '-' },
     ];
 
     const serviciosDisponibles = product.detalles?.servicios || [];
@@ -56,11 +56,12 @@ const ProductDetails = () => {
     }));
 
     const currentUrl = window.location.href;
-    const shareText = `¡Mirá esta propiedad en ${product.detalles?.barrio || ''}!: ${product.name}`;
+    const propertyTitle = product.name;
+    const shareText = `INMOBILIARIA SONIA FLORES\nALQUILA\n${propertyTitle}\n${product.detalles?.dormitorios || 0} Dormitorios\n${product.detalles?.barrio || ''}\n\nPara más información comunicarse al 3884881245 de 9 a 13 y de 16 a 18hs.\nMartillera Sonia Flores MP 177.`;
 
     const shareLinks = [
-        { platform: 'WhatsApp', url: `https://wa.me/?text=${encodeURIComponent(`${shareText} ${currentUrl}`)}`, icon: <BiLogoWhatsapp size={24} /> },
-        { platform: 'Facebook', url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`, icon: <BiLogoFacebook size={24} /> },
+        { platform: 'WhatsApp', url: `https://wa.me/?text=${encodeURIComponent(shareText + "\n\n" + currentUrl)}`, icon: <BiLogoWhatsapp size={24} /> },
+        { platform: 'Facebook', url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}&quote=${encodeURIComponent(shareText)}`, icon: <BiLogoFacebook size={24} /> },
         { platform: 'Instagram', url: '#', icon: <BiLogoInstagram size={24} /> },
         { platform: 'Copiar Enlace', url: currentUrl, icon: <BiShareAlt size={24} /> },
     ];
@@ -77,9 +78,11 @@ const ProductDetails = () => {
         window.open(link.url, '_blank', 'width=600,height=400');
     };
 
+    // Validación del precio para evitar NaN
+    const hasValidPrice = product.price !== undefined && product.price !== null && !isNaN(product.price) && product.price !== '';
+
     return (
         <>
-            {/* Open Graph Meta Tags */}
             <Helmet>
                 <title>{product.name} - {product.detalles?.barrio}</title>
                 <meta name="description" content={product.description} />
@@ -89,7 +92,7 @@ const ProductDetails = () => {
                 <meta property="og:image" content={mainImage} />
                 <meta property="og:url" content={currentUrl} />
                 <meta property="og:type" content="website" />
-                <meta property="og:site_name" content="Tu Inmobiliaria" />
+                <meta property="og:site_name" content="Inmobiliaria Sonia Flores" />
                 
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content={product.name} />
@@ -98,32 +101,63 @@ const ProductDetails = () => {
             </Helmet>
 
             <div className='flex flex-col min-h-screen bg-gray-50 w-full overflow-x-hidden'>
-                {/* Hero Image */}
+                {/* Hero Image / Video Carrusel */}
                 <div className='w-full relative bg-black h-[40vh] md:h-[65vh] cursor-pointer overflow-hidden' onClick={() => setIsFullscreen(true)}>
                     <div className="flex w-full h-full transition-transform duration-500 ease-out" style={{ transform: `translateX(-${currentImgIndex * 100}%)` }}>
-                        {imagesList.map((img, index) => (
-                            <div key={index} className="min-w-full h-full">
-                                <img src={img} className='w-full h-full object-cover' alt={`Vista ${index + 1}`} />
-                            </div>
-                        ))}
+                        {imagesList.map((file, index) => {
+                            const isVideo = file.toLowerCase().endsWith('.mp4') || file.toLowerCase().endsWith('.mov') || file.toLowerCase().endsWith('.webm');
+
+                            return (
+                                <div key={index} className="min-w-full h-full bg-zinc-950 relative flex items-center justify-center overflow-hidden p-4 md:p-6">
+                                    {/* Fondo "Vidrio con Vapor" desenfocado */}
+                                    {!isVideo && (
+                                        <>
+                                            <img 
+                                                src={file} 
+                                                className='absolute inset-0 w-full h-full object-cover blur-3xl opacity-55 scale-110 pointer-events-none' 
+                                                alt="" 
+                                            />
+                                            {/* Capa de vidrio esmerilado oscura */}
+                                            <div className="absolute inset-0 bg-zinc-950/50 backdrop-blur-md pointer-events-none"></div>
+                                        </>
+                                    )}
+
+                                    {/* Renderizado con un margen seguro gracias al padding del contenedor padre */}
+                                    {isVideo ? (
+                                        <video 
+                                            src={file} 
+                                            className='relative max-w-full max-h-full object-contain z-10 rounded-lg shadow-2xl' 
+                                            controls 
+                                            playsInline
+                                            onClick={(e) => e.stopPropagation()} 
+                                        />
+                                    ) : (
+                                        <img 
+                                            src={file} 
+                                            className='relative max-w-full max-h-full object-contain z-10 rounded-lg shadow-2xl' 
+                                            alt={`Vista ${index + 1}`} 
+                                        />
+                                    )}
+                                </div>
+                            );
+                        })}
                     </div>
 
-                    <button onClick={prevImage} className='absolute left-2 md:left-6 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 p-2 md:p-4 rounded-full text-white transition-colors'>
+                    <button onClick={prevImage} className='absolute left-2 md:left-6 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 p-2 md:p-4 rounded-full text-white transition-colors z-20'>
                         <BiChevronLeft size={28} />
                     </button>
-                    <button onClick={nextImage} className='absolute right-2 md:right-6 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 p-2 md:p-4 rounded-full text-white transition-colors'>
+                    <button onClick={nextImage} className='absolute right-2 md:right-6 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 p-2 md:p-4 rounded-full text-white transition-colors z-20'>
                         <BiChevronRight size={28} />
                     </button>
 
-                    <div className="absolute bottom-4 right-4 bg-black/60 text-white text-sm px-4 py-1 rounded-full">
+                    <div className="absolute bottom-4 right-4 bg-black/60 text-white text-sm px-4 py-1 rounded-full z-20">
                         {currentImgIndex + 1} / {imagesList.length}
                     </div>
                 </div>
 
-                {/* Resto del contenido (igual que antes) */}
                 <div className='w-full max-w-[1500px] mx-auto px-3 sm:px-6 lg:px-8 py-6 lg:py-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8'>
                     <div className='lg:col-span-8 space-y-6 lg:space-y-8'>
-                        {/* ... (Mantengo el contenido anterior) */}
+                        {/* Contenido principal */}
                         <div className="bg-white p-5 sm:p-8 rounded-2xl border border-gray-100 shadow-sm">
                             <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
                                 <div className="flex items-center gap-2 text-red-600 font-bold text-sm uppercase">
@@ -143,8 +177,14 @@ const ProductDetails = () => {
 
                             <h1 className='text-2xl sm:text-4xl font-black text-gray-900 leading-tight mb-3'>{product.name}</h1>
                             <p className='text-2xl sm:text-3xl font-extrabold text-red-600'>
-                                USD ${new Intl.NumberFormat('es-AR').format(product.price)}
-                                {product.category.toLowerCase() === 'alquiler' && <span className='text-base sm:text-lg font-medium text-gray-500 ml-1'>/ mes</span>}
+                                {hasValidPrice ? (
+                                    <>
+                                        ${new Intl.NumberFormat('es-AR').format(product.price)}
+                                        {product.category.toLowerCase() === 'alquiler' && <span className='text-base sm:text-lg font-medium text-gray-500 ml-1'>/ mes</span>}
+                                    </>
+                                ) : (
+                                    "A consultar"
+                                )}
                             </p>
                         </div>
 
@@ -180,34 +220,97 @@ const ProductDetails = () => {
                         )}
                     </div>
 
-                    {/* Mapa */}
-                    <div className={`lg:col-span-4 ${isFullscreen ? 'hidden lg:block' : 'block'}`}>
+                    {/* Mapa + Dirección */}
+                    <div className={`lg:col-span-4 ${isFullscreen ? 'hidden lg:block' : 'block'} pt-16 lg:pt-0`}>
                         <div className="bg-white rounded-3xl border border-gray-100 shadow-lg overflow-hidden lg:sticky lg:top-8">
-                            <div className="h-[320px] sm:h-[400px] lg:h-[520px] w-full">
-                                <MapContainer center={coords} zoom={15} className="w-full h-full">
+                            <div className="h-[300px] sm:h-[380px] lg:h-[520px] w-full relative z-10 isolation-auto">
+                                <MapContainer center={coords} zoom={15} className="w-full h-full z-0">
                                     <TileLayer url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png" />
                                     <Marker position={coords} icon={L.divIcon({ className: 'custom-marker', html: `<div class="w-9 h-9 bg-red-600 rounded-full border-4 border-white shadow-xl"></div>` })} />
                                 </MapContainer>
+
+                                <button 
+                                    onClick={() => setIsMapFullscreen(true)}
+                                    className="absolute top-4 right-4 bg-white/95 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg z-[450] transition-all hover:scale-105 active:scale-95"
+                                    type="button"
+                                    title="Ver mapa en pantalla completa"
+                                >
+                                    <MdFullscreen size={28} />
+                                </button>
+                            </div>
+
+                            <div className="p-5 flex items-start gap-3 text-gray-700 border-t border-gray-100">
+                                <MdLocationOn className="text-red-600 text-2xl mt-0.5 flex-shrink-0" />
+                                <div className="text-sm leading-tight">
+                                    {product.detalles?.barrio || ''}, 
+                                    {product.detalles?.calle ? ` ${product.detalles.calle}` : ''}
+                                    {product.detalles?.numero ? ` ${product.detalles.numero}` : ''}, 
+                                    Jujuy, Argentina
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {/* Fullscreen */}
+                {/* Fullscreen Multimedia (Imágenes y Videos) */}
                 {isFullscreen && (
-                    <div className="fixed inset-0 z-[100] bg-black flex items-center justify-center" onClick={() => setIsFullscreen(false)}>
-                        <button onClick={() => setIsFullscreen(false)} className='absolute top-6 right-6 text-white z-[110]'><IoMdClose size={40} /></button>
-                        <div className="w-full h-full flex items-center justify-center p-4">
+                    <div className="fixed inset-0 z-[500] bg-black flex items-center justify-center" onClick={() => setIsFullscreen(false)}>
+                        <button onClick={() => setIsFullscreen(false)} className='absolute top-6 right-6 text-white z-[510]'><IoMdClose size={40} /></button>
+                        <div className="w-full h-full flex items-center justify-center p-6 md:p-10" onClick={(e) => e.stopPropagation()}>
                             <div className="flex w-full h-full transition-transform duration-500 ease-out" style={{ transform: `translateX(-${currentImgIndex * 100}%)` }}>
-                                {imagesList.map((img, index) => (
-                                    <div key={index} className="min-w-full h-full flex items-center justify-center">
-                                        <img src={img} className='max-w-full max-h-full object-contain' onClick={e => e.stopPropagation()} alt="Full" />
-                                    </div>
-                                ))}
+                                {imagesList.map((file, index) => {
+                                    const isVideo = file.toLowerCase().endsWith('.mp4') || file.toLowerCase().endsWith('.mov') || file.toLowerCase().endsWith('.webm');
+
+                                    return (
+                                        <div key={index} className="min-w-full h-full flex items-center justify-center p-2">
+                                            {isVideo ? (
+                                                <video 
+                                                    src={file} 
+                                                    className='max-w-full max-h-full object-contain rounded-md shadow-2xl' 
+                                                    controls 
+                                                    playsInline
+                                                    onClick={e => e.stopPropagation()} 
+                                                />
+                                            ) : (
+                                                <img 
+                                                    src={file} 
+                                                    className='max-w-full max-h-full object-contain rounded-md shadow-2xl' 
+                                                    onClick={e => e.stopPropagation()} 
+                                                    alt="Full" 
+                                                />
+                                            )}
+                                        </div>
+                                    );
+                                })}
                             </div>
                         </div>
-                        <button onClick={prevImage} className='absolute left-4 md:left-8 text-white z-[110]'><BiChevronLeft size={48} /></button>
-                        <button onClick={nextImage} className='absolute right-4 md:right-8 text-white z-[110]'><BiChevronRight size={48} /></button>
+                        <button onClick={prevImage} className='absolute left-4 md:left-8 text-white z-[510]'><BiChevronLeft size={48} /></button>
+                        <button onClick={nextImage} className='absolute right-4 md:right-8 text-white z-[510]'><BiChevronRight size={48} /></button>
+                    </div>
+                )}
+
+                {/* Fullscreen Mapa */}
+                {isMapFullscreen && (
+                    <div 
+                        className="fixed inset-0 z-[999] bg-black/90 flex flex-col backdrop-blur-sm" 
+                        onClick={() => setIsMapFullscreen(false)}
+                    >
+                        <button 
+                            onClick={() => setIsMapFullscreen(false)} 
+                            className='absolute top-6 right-6 text-white hover:text-red-500 transition-colors z-[1010] bg-black/40 p-2 rounded-full'
+                        >
+                            <IoMdClose size={32} />
+                        </button>
+                        
+                        <div 
+                            className="flex-1 m-4 sm:m-10 bg-white rounded-2xl overflow-hidden shadow-2xl relative"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <MapContainer center={coords} zoom={17} className="w-full h-full">
+                                <TileLayer url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png" />
+                                <Marker position={coords} icon={L.divIcon({ className: 'custom-marker', html: `<div class="w-12 h-12 bg-red-600 rounded-full border-4 border-white shadow-2xl flex items-center justify-center"><div class="w-5 h-5 bg-white rounded-full"></div></div>` })} />
+                            </MapContainer>
+                        </div>
                     </div>
                 )}
             </div>

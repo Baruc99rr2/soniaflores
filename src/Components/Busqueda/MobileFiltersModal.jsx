@@ -10,7 +10,7 @@ const MobileFiltersModal = ({
   handleClearFilters
 }) => {
   const barriosUnicos = ["Bajo La Viña", "Los Perales", "Centro", "Ciudad de Nieva", "Almirante Brown", 
-                        "Moreno", "Palpalá", "Cuyaya", "San Pedrito", "Alto Comedero", "Yala", "San Pablo de Reyes"];
+                        "Mariano Moreno", "Palpalá", "Cuyaya", "San Pedrito", "Alto Comedero", "Yala", "San Pablo de Reyes, San Antonio"];
 
   if (!isOpen) return null;
 
@@ -142,7 +142,7 @@ const MobileFiltersModal = ({
             </div>
 
             <div>
-              <label className="text-xs font-bold uppercase text-gray-700 block mb-1">Precio Mín (USD)</label>
+              <label className="text-xs font-bold uppercase text-gray-700 block mb-1">Precio Mín</label>
               <input 
                 type="number" 
                 placeholder="Mínimo" 
@@ -153,7 +153,7 @@ const MobileFiltersModal = ({
             </div>
 
             <div>
-              <label className="text-xs font-bold uppercase text-gray-700 block mb-1">Precio Max (USD)</label>
+              <label className="text-xs font-bold uppercase text-gray-700 block mb-1">Precio Max</label>
               <input 
                 type="number" 
                 placeholder="Máximo" 
