@@ -106,7 +106,7 @@ const PropertySearchCard = ({
             {product.price > 0 ? `$ ${new Intl.NumberFormat('es-AR').format(product.price)}` : 'A consultar'}
           </div>
           <Link 
-            to={`/product/${product.id}`} 
+            to={`/propiedades/${product.id}`} 
             className="bg-gray-900 hover:bg-red-600 text-white font-bold text-xs px-5 py-2.5 rounded-lg transition-colors whitespace-nowrap"
           >
             Ver detalles

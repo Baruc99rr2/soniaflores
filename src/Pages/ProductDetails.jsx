@@ -26,7 +26,7 @@ const ProductDetails = () => {
 
     const product = productsData.find((p) => p.id === parseInt(id));
 
-    if (!product) return <div className="text-center py-20 font-medium">Producto no encontrado.</div>;
+    if (!product) return <div className="text-center py-20 font-medium">Propiedad no encontrada.</div>;
 
     const coords = [
         product.detalles?.lat || -24.185,
@@ -39,7 +39,6 @@ const ProductDetails = () => {
     const prevImage = (e) => { e?.stopPropagation(); setCurrentImgIndex(prev => prev === 0 ? imagesList.length - 1 : prev - 1); };
     const nextImage = (e) => { e?.stopPropagation(); setCurrentImgIndex(prev => prev === imagesList.length - 1 ? 0 : prev + 1); };
 
-    // Se removió Año de const. y Antigüedad
     const specs = [
         { icon: <BiBuildingHouse />, label: 'Tipo', value: product.detalles?.tipo || '-' },
         { icon: <BiHomeAlt />, label: 'Ambientes', value: product.detalles?.ambientes || '-' },
@@ -55,20 +54,24 @@ const ProductDetails = () => {
         label: servicio,
     }));
 
-    const currentUrl = window.location.href;
+    // CONSTRUIMOS LA URL LIMPIA CON /propiedades/ EN LUGAR DE /product/
+    const originUrl = window.location.origin;
+    const currentUrl = `${originUrl}/propiedades/${id}`;
+    
     const propertyTitle = product.name;
     const shareText = `INMOBILIARIA SONIA FLORES\nALQUILA\n${propertyTitle}\n${product.detalles?.dormitorios || 0} Dormitorios\n${product.detalles?.barrio || ''}\n\nPara más información comunicarse al 3884881245 de 9 a 13 y de 16 a 18hs.\nMartillera Sonia Flores MP 177.`;
 
     const shareLinks = [
         { platform: 'WhatsApp', url: `https://wa.me/?text=${encodeURIComponent(shareText + "\n\n" + currentUrl)}`, icon: <BiLogoWhatsapp size={24} /> },
-        { platform: 'Facebook', url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}&quote=${encodeURIComponent(shareText)}`, icon: <BiLogoFacebook size={24} /> },
+        // Modificado para optimizar el rastreo del bot de Facebook
+        { platform: 'Facebook', url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`, icon: <BiLogoFacebook size={24} /> },
         { platform: 'Instagram', url: '#', icon: <BiLogoInstagram size={24} /> },
         { platform: 'Copiar Enlace', url: currentUrl, icon: <BiShareAlt size={24} /> },
     ];
 
     const handleShare = (link) => {
         if (link.platform === 'Copiar Enlace') {
-            navigator.clipboard.writeText(currentUrl).then(() => alert('Enlace copiado al portapapeles'));
+            navigator.clipboard.writeText(currentUrl).then(() => alert('Enlace de la propiedad copiado al portapapeles'));
             return;
         }
         if (link.platform === 'Instagram') {
@@ -78,7 +81,6 @@ const ProductDetails = () => {
         window.open(link.url, '_blank', 'width=600,height=400');
     };
 
-    // Validación del precio para evitar NaN
     const hasValidPrice = product.price !== undefined && product.price !== null && !isNaN(product.price) && product.price !== '';
 
     return (
@@ -109,7 +111,6 @@ const ProductDetails = () => {
 
                             return (
                                 <div key={index} className="min-w-full h-full bg-zinc-950 relative flex items-center justify-center overflow-hidden p-4 md:p-6">
-                                    {/* Fondo "Vidrio con Vapor" desenfocado */}
                                     {!isVideo && (
                                         <>
                                             <img 
@@ -117,12 +118,10 @@ const ProductDetails = () => {
                                                 className='absolute inset-0 w-full h-full object-cover blur-3xl opacity-55 scale-110 pointer-events-none' 
                                                 alt="" 
                                             />
-                                            {/* Capa de vidrio esmerilado oscura */}
                                             <div className="absolute inset-0 bg-zinc-950/50 backdrop-blur-md pointer-events-none"></div>
                                         </>
                                     )}
 
-                                    {/* Renderizado con un margen seguro gracias al padding del contenedor padre */}
                                     {isVideo ? (
                                         <video 
                                             src={file} 
@@ -252,7 +251,7 @@ const ProductDetails = () => {
                     </div>
                 </div>
 
-                {/* Fullscreen Multimedia (Imágenes y Videos) */}
+                {/* Fullscreen Multimedia */}
                 {isFullscreen && (
                     <div className="fixed inset-0 z-[500] bg-black flex items-center justify-center" onClick={() => setIsFullscreen(false)}>
                         <button onClick={() => setIsFullscreen(false)} className='absolute top-6 right-6 text-white z-[510]'><IoMdClose size={40} /></button>

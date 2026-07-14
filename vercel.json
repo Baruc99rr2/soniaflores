@@ -2,7 +2,29 @@
   "rewrites": [
     {
       "source": "/(.*)",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": "(facebookexternalhit|twitterbot|googlebot|bingbot|linkedinbot|embedly)"
+        }
+      ],
+      "destination": "https://service.prerender.io/https://soniaflores.vercel.app/$1"
+    },
+    {
+      "source": "/(.*)",
       "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "x-prerender-token",
+          "value": "UVfJloBF0H6yuWkL2pYu"
+        }
+      ]
     }
   ]
 }

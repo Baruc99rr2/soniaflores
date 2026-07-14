@@ -25,8 +25,8 @@ const App = () => {
       return;
     }
 
-    // Duración total de la carga: 4500ms (4.5 segundos)
-    const duration = 4500; 
+    // Duración total de la carga: 8000 milisegundos
+    const duration = 8000; 
     const intervalTime = 16; // Aproximadamente 60fps (1000ms / 60 frames = 16.6ms)
     const step = 100 / (duration / intervalTime);
 
@@ -108,7 +108,7 @@ const App = () => {
         
         <Routes>
           <Route path='/' element={<Homepage />} />
-          <Route path='/product/:id' element={<ProductDetails />} /> 
+          <Route path='/propiedades/:id' element={<ProductDetails />} /> 
           <Route path='/busqueda' element={<Busqueda />} /> 
         </Routes>
 
