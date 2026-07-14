@@ -6,7 +6,7 @@
         {
           "type": "header",
           "key": "user-agent",
-          "value": "(facebookexternalhit|twitterbot|googlebot|bingbot|Bingbot|linkedinbot|embedly|Prerender|prerender|PrerenderBot)"
+          "value": ".*(facebookexternalhit|twitterbot|googlebot|bingbot|linkedinbot|embedly|Prerender|prerender|PrerenderBot|renderbot|bot).*"
         }
       ],
       "destination": "https://service.prerender.io/https://soniaflores.vercel.app/$1"
@@ -21,7 +21,7 @@
       "source": "/(.*)",
       "headers": [
         {
-          "key": "x-prerender-token",
+          "key": "X-Prerender-Token",
           "value": "UVfJloBF0H6yuWkL2pYu"
         }
       ]
