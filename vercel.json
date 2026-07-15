@@ -6,25 +6,14 @@
         {
           "type": "header",
           "key": "user-agent",
-          "value": "(facebookexternalhit|Twitterbot|twitterbot|LinkedInBot|linkedinbot|embedly|baiduspider|bingbot|googlebot|Prerender|prerender|PrerenderBot|renderbot|bot|Bot)"
+          "value": "(facebookexternalhit|twitterbot|googlebot|bingbot|Bingbot|linkedinbot|embedly|Prerender|prerender|PrerenderBot)"
         }
       ],
-      "destination": "https://service.prerender.io/https://soniaflores.vercel.app/:1"
+      "destination": "/api/prerender?path=$1"
     },
     {
       "source": "/(.*)",
       "destination": "/index.html"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Prerender-Token",
-          "value": "UVfJloBF0H6yuWkL2pYu"
-        }
-      ]
     }
   ]
 }
