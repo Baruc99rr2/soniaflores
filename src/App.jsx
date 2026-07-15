@@ -26,7 +26,7 @@ const App = () => {
     }
 
     // Duración total de la carga: 8000 milisegundos
-    const duration = 8000; 
+    const duration = 7500; 
     const intervalTime = 16; // Aproximadamente 60fps (1000ms / 60 frames = 16.6ms)
     const step = 100 / (duration / intervalTime);
 
