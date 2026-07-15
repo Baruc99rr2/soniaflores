@@ -1,25 +1,27 @@
 export default async function handler(req, res) {
-  // Obtenemos la ruta que el bot quería visitar (ej: /propiedades/1)
-  const path = req.query.path || '';
-  const targetUrl = `https://soniaflores.vercel.app/${path}`;
-  const prerenderUrl = `https://service.prerender.io/${targetUrl}`;
-
   try {
+    const path = req.query.path || '';
+    const targetUrl = `https://soniaflores.vercel.app${path.startsWith('/') ? path : '/' + path}`;
+    const prerenderUrl = `https://service.prerender.io/${targetUrl}`;
+
     const response = await fetch(prerenderUrl, {
       headers: {
-        'X-Prerender-Token': 'UVfJloBF0H6yuWkL2pYu' // Tu token real
+        'X-Prerender-Token': 'UVfJloBF0H6yuWkL2pYu'
       }
     });
 
-    // Copiamos las cabeceras que nos devuelve Prerender (incluyendo x-prerender-request-id)
+    // Copiar headers de Prerender
     response.headers.forEach((value, key) => {
-      res.setHeader(key, value);
+      if (key.toLowerCase() !== 'content-length') {
+        res.setHeader(key, value);
+      }
     });
 
     const html = await response.text();
     res.status(response.status).send(html);
+
   } catch (error) {
-    // Si algo falla, dejamos que cargue por defecto
-    res.status(500).send(error.message);
+    console.error('Prerender Error:', error);
+    res.status(500).send('Error en prerender proxy');
   }
 }
