@@ -64,7 +64,10 @@ const ProductDetails = () => {
     const currentUrl = `${originUrl}/propiedades/${id}`;
     
     const propertyTitle = product.name;
-    const shareText = `INMOBILIARIA SONIA FLORES\nALQUILA\n${propertyTitle}\n${product.detalles?.dormitorios || 0} Dormitorios\n${product.detalles?.barrio || ''}\n\nPara más información comunicarse al 3884881245 de 9 a 13 y de 16 a 18hs.\nMartillera Sonia Flores MP 177.`;
+    const categoryUpper = product.category ? product.category.toUpperCase() : 'VENTA';
+    
+    // MENSAJE PREARMADO ACTUALIZADO CON LA DESCRIPCIÓN DINÁMICA
+    const shareText = `INMOBILIARIA SONIA FLORES\n${categoryUpper}\n${propertyTitle}\n\n${product.description || ''}\n\nPara más información comunicarse al 3884881245 de 9 a 13 y de 16 a 18hs.\nMartillera Sonia Flores MP 177.`;
 
     const shareLinks = [
         { platform: 'WhatsApp', url: `https://wa.me/?text=${encodeURIComponent(shareText + "\n\n" + currentUrl)}`, icon: <BiLogoWhatsapp size={24} /> },

@@ -136,7 +136,7 @@ const ProductCard = ({ product, dimensions, index, totalItems }) => {
           </span>
 
           <Link 
-            to={`/product/${product.id}`}
+            to={`/propiedades/${product.id}`}
             className="flex items-center justify-center border border-white/60 w-6 h-6 md:w-7 md:h-7 rounded-lg hover:bg-white hover:text-black hover:border-white active:scale-95 transition-all duration-300 cumulative-button z-20 pointer-events-auto"
             title="Ver detalles de la propiedad"
           >

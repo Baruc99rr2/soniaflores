@@ -41,7 +41,7 @@ const ScrollReveal = ({ children, delay = "delay-0" }) => {
 
 // TARJETA DE PROPIEDAD
 const ProductCard = ({ product }) => {
-  const displayImage = product.images?.[0] || '/propiedades/unisex.jpg';
+  const displayImage = product.images?.[0] || '/propiedades/casa-bajolavina-venta.png';
   
   // Validación de precio para evitar NaN
   const hasValidPrice = product.price !== undefined && product.price !== null && !isNaN(product.price) && product.price !== '';
@@ -89,7 +89,7 @@ const ProductCard = ({ product }) => {
           <div className="text-base font-bold text-gray-900 mt-1"><span className="font-extrabold text-lg text-gray-900">{priceText}</span></div>
         </div>
       </div>
-      <Link to={`/product/${product.id}`} className="property-card-button w-full text-white text-center text-xs md:text-sm font-bold py-3 px-4 rounded-xl transition-colors duration-300 block shadow-xs mt-2">Ver detalles</Link>
+      <Link to={`/propiedades/${product.id}`} className="property-card-button w-full text-white text-center text-xs md:text-sm font-bold py-3 px-4 rounded-xl transition-colors duration-300 block shadow-xs mt-2">Ver detalles</Link>
     </div>
   );
 };

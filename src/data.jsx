@@ -14,7 +14,7 @@ export const productsData = [
         name: 'DEPARTAMENTO en Barrio Los Perales',
         price: "480000",
         category: 'Alquiler',
-        description: 'Cocina , comedor, dormitorio,  antebaño baño , balcón y cochera',
+        description: 'Cocina , comedor, dormitorio,  antebaño baño , balcón y cochera. Para mas información comunicarse al 388-4881245 de 9 a 13 y de 16 a 18 hs. Martillera Sonia Flores MP 177',
         detalles: {
             tipo: 'departamento',
             barrio: 'Los Perales',
@@ -251,7 +251,7 @@ export const productsData = [
         name: 'Departamento de 2 dormitorios sobre Av. Almirante Brown',
         price: 470000,
         category: 'Alquiler',
-        description: 'Departamento ubicado sobre Av. Almirante Brown. Cuenta con cocina, 2 dormitorios (uno con aire acondicionado), baño y dos balcones pequeños. Expensas aproximadas de $30.000. Excelente opción para quienes buscan comodidad y buena ubicación.',
+        description: 'Departamento ubicado sobre Av. Almirante Brown. Cuenta con cocina, 2 dormitorios (uno con aire acondicionado), baño y dos balcones pequeños. Expensas aproximadas de $30.000. Excelente opción para quienes buscan comodidad y buena ubicación. Para mas información comunicarse al 388-4881245 de 9 a 13 y de 16 a 18 hs. Martillera Sonia Flores MP 177',
         detalles: {
             tipo: 'Departamento',
             barrio: 'barrio Almirante Brown',
@@ -279,7 +279,7 @@ export const productsData = [
         name: 'Departamento de 2 dormitorios con excelente vista',
         price: 700000,
         category: 'Alquiler',
-        description: 'Departamento con living comedor, cocina, dos dormitorios, baño, lavadero y balcón. Se destaca por su excelente vista e iluminación natural.',
+        description: 'Departamento con living comedor, cocina, dos dormitorios, baño, lavadero y balcón. Se destaca por su excelente vista e iluminación natural. Para mas información comunicarse al 388-4881245 de 9 a 13 y de 16 a 18 hs. Martillera Sonia Flores MP 177',
         detalles: {
             tipo: 'Departamento',
             barrio: 'Los Perales',
@@ -307,7 +307,7 @@ export const productsData = [
         name: 'Departamento de 6 ambientes en el Microcentro',
         price: 1500000,
         category: 'Alquiler',
-        description: 'Amplio departamento ubicado en pleno microcentro de San Salvador de Jujuy. Cuenta con 6 ambientes, baño, cocina, patio y dos balcones de uso exclusivo. Se destaca por su excelente iluminación natural. Ideal para vivienda familiar o para uso comercial.',
+        description: 'Amplio departamento ubicado en pleno microcentro de San Salvador de Jujuy. Cuenta con 6 ambientes, baño, cocina, patio y dos balcones de uso exclusivo. Se destaca por su excelente iluminación natural. Ideal para vivienda familiar o para uso comercial. Para mas información comunicarse al 388-4881245 de 9 a 13 y de 16 a 18 hs. Martillera Sonia Flores MP 177',
         detalles: {
             tipo: 'Departamento',
             barrio: 'Microcentro',
@@ -341,7 +341,7 @@ export const productsData = [
         name: 'Departamento de 3 dormitorios en Barrio Centro',
         price: 800000,
         category: 'Alquiler',
-        description: 'Amplio departamento ubicado en Barrio Centro. Cuenta con living comedor, cocina, 3 dormitorios con placares, lavadero, habitación de servicio, baño de servicio y un amplio balcón. Excelente vista e iluminación natural.',
+        description: 'Amplio departamento ubicado en Barrio Centro. Cuenta con living comedor, cocina, 3 dormitorios con placares, lavadero, habitación de servicio, baño de servicio y un amplio balcón. Excelente vista e iluminación natural. Para mas información comunicarse al 388-4881245 de 9 a 13 y de 16 a 18 hs. Martillera Sonia Flores MP 177',
         detalles: {
             tipo: 'Departamento',
             barrio: 'Centro',
@@ -378,7 +378,7 @@ export const productsData = [
         name: 'Casa con departamento independiente a 30 m de Av. Mosconi',
         price: 'A consulta',
         category: 'Venta',
-        description: 'Excelente propiedad desarrollada en dos plantas. En planta baja cuenta con living comedor, cocina comedor, dos dormitorios, habitación de usos múltiples, asador y cochera. En planta alta dispone de un departamento con entrada independiente, living comedor, amplia cocina con comedor diario, un dormitorio y baño. Todos los servicios y excelente ubicación, a solo 30 metros de Av. Mosconi.',
+        description: 'Excelente propiedad desarrollada en dos plantas. En planta baja cuenta con living comedor, cocina comedor, dos dormitorios, habitación de usos múltiples, asador y cochera. En planta alta dispone de un departamento con entrada independiente, living comedor, amplia cocina con comedor diario, un dormitorio y baño. Todos los servicios y excelente ubicación, a solo 30 metros de Av. Mosconi. Para mas información comunicarse al 388-4881245 de 9 a 13 y de 16 a 18 hs. Martillera Sonia Flores MP 177',
         detalles: {
             tipo: 'Casa',
             barrio: 'Chijra',
@@ -414,7 +414,7 @@ export const productsData = [
         name: 'Departamento de 1 dormitorio en Planta Baja en San Pedrito',
         price: 400000,
         category: 'Alquiler',
-        description: 'Departamento en planta baja ubicado en Barrio San Pedrito. Cuenta con cocina comedor, baño y dormitorio. Excelente opción de alquiler en una zona de fácil acceso.',
+        description: 'Departamento en planta baja ubicado en Barrio San Pedrito. Cuenta con cocina comedor, baño y dormitorio. Excelente opción de alquiler en una zona de fácil acceso. Para mas información comunicarse al 388-4881245 de 9 a 13 y de 16 a 18 hs. Martillera Sonia Flores MP 177',
         detalles: {
             tipo: 'Departamento',
             barrio: 'San Pedrito',
@@ -442,7 +442,7 @@ export const productsData = [
         name: 'Terreno de 20 hectáreas en San Antonio',
         price: 'A consultar',
         category: 'Venta',
-        description: 'Campo de 20 hectáreas ubicado en San Antonio, sobre El Camino Real. Superficie totalmente plana, ideal para diversos emprendimientos. Zona con gran valor cultural e histórico por ser punto de partida de la Marcha Patriótica por el Camino Real.',
+        description: 'Campo de 20 hectáreas ubicado en San Antonio, sobre El Camino Real. Superficie totalmente plana, ideal para diversos emprendimientos. Zona con gran valor cultural e histórico por ser punto de partida de la Marcha Patriótica por el Camino Real. Para mas información comunicarse al 388-4881245 de 9 a 13 y de 16 a 18 hs. Martillera Sonia Flores MP 177',
         detalles: {
             tipo: 'Terreno',
             barrio: 'San Antonio',
@@ -470,7 +470,7 @@ export const productsData = [
         name: 'Oficinas en 1° piso en pleno Centro',
         price: 500000,
         category: 'Alquiler',
-        description: 'Dos oficinas en alquiler ubicadas en pleno centro. Cuenta con sala de espera y baño, ideales para profesionales, estudios u oficinas administrativas.',
+        description: 'Dos oficinas en alquiler ubicadas en pleno centro. Cuenta con sala de espera y baño, ideales para profesionales, estudios u oficinas administrativas. Para mas información comunicarse al 388-4881245 de 9 a 13 y de 16 a 18 hs. Martillera Sonia Flores MP 177',
         detalles: {
             tipo: 'Oficina',
             barrio: 'Centro',
