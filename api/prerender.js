@@ -1,7 +1,10 @@
 export default async function handler(req, res) {
   try {
     const path = req.query.path || '';
-    const targetUrl = `https://soniaflores.vercel.app${path.startsWith('/') ? path : '/' + path}`;
+    
+    // Evitamos problemas de dobles barras '/' en la URL de destino
+    const cleanPath = path.startsWith('/') ? path : `/${path}`;
+    const targetUrl = `https://soniaflores.vercel.app${cleanPath}`;
     const prerenderUrl = `https://service.prerender.io/${targetUrl}`;
 
     const response = await fetch(prerenderUrl, {
@@ -10,9 +13,11 @@ export default async function handler(req, res) {
       }
     });
 
-    // Copiar headers de Prerender
+    // Copiar headers de Prerender de forma segura
     response.headers.forEach((value, key) => {
-      if (key.toLowerCase() !== 'content-length') {
+      const lowerKey = key.toLowerCase();
+      // Excluimos content-length y content-encoding para evitar conflictos de compresión
+      if (lowerKey !== 'content-length' && lowerKey !== 'content-encoding') {
         res.setHeader(key, value);
       }
     });

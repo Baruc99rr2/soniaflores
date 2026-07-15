@@ -6,7 +6,7 @@
         {
           "type": "header",
           "key": "user-agent",
-          "value": "(facebookexternalhit|twitterbot|googlebot|bingbot|Bingbot|linkedinbot|embedly|Prerender|prerender|PrerenderBot)"
+          "value": ".*(facebookexternalhit|twitterbot|googlebot|bingbot|linkedinbot|embedly|slackbot|vkShare).*"
         }
       ],
       "destination": "/api/prerender?path=$1"
