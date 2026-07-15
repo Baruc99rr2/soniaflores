@@ -34,7 +34,12 @@ const ProductDetails = () => {
     ];
 
     const imagesList = product.images || [product.image];
-    const mainImage = imagesList[0];
+    
+    // ASEGURAMOS QUE LA IMAGEN PARA EL HELMET (OG:IMAGE) SEA SIEMPRE UNA URL ABSOLUTA (https://...)
+    const mainImageRaw = imagesList[0];
+    const mainImage = mainImageRaw?.startsWith('http') 
+        ? mainImageRaw 
+        : `${window.location.origin}${mainImageRaw}`;
 
     const prevImage = (e) => { e?.stopPropagation(); setCurrentImgIndex(prev => prev === 0 ? imagesList.length - 1 : prev - 1); };
     const nextImage = (e) => { e?.stopPropagation(); setCurrentImgIndex(prev => prev === imagesList.length - 1 ? 0 : prev + 1); };
@@ -63,7 +68,6 @@ const ProductDetails = () => {
 
     const shareLinks = [
         { platform: 'WhatsApp', url: `https://wa.me/?text=${encodeURIComponent(shareText + "\n\n" + currentUrl)}`, icon: <BiLogoWhatsapp size={24} /> },
-        // Modificado para optimizar el rastreo del bot de Facebook
         { platform: 'Facebook', url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`, icon: <BiLogoFacebook size={24} /> },
         { platform: 'Instagram', url: '#', icon: <BiLogoInstagram size={24} /> },
         { platform: 'Copiar Enlace', url: currentUrl, icon: <BiShareAlt size={24} /> },
@@ -78,6 +82,21 @@ const ProductDetails = () => {
             alert('Para compartir en Instagram, copia el enlace y pégalo manualmente en tu historia.');
             return;
         }
+        
+        // SI ES FACEBOOK, COPIAMOS EL TEXTO EN EL PORTAPAPELES ANTES DE ABRIR LA PESTAÑA
+        if (link.platform === 'Facebook') {
+            navigator.clipboard.writeText(shareText)
+                .then(() => {
+                    alert('¡Texto de la propiedad copiado! Cuando se abra Facebook, mantén presionado y dale a "Pegar" en tu publicación.');
+                    window.open(link.url, '_blank', 'width=600,height=400');
+                })
+                .catch((err) => {
+                    console.error('Error al copiar el texto: ', err);
+                    window.open(link.url, '_blank', 'width=600,height=400');
+                });
+            return;
+        }
+
         window.open(link.url, '_blank', 'width=600,height=400');
     };
 
