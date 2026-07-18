@@ -124,11 +124,7 @@ const Nosotros = () => {
             
             {/* Texto Profesionalizado con Información de Sonia Alba Flores */}
             <p className={`relative z-10 ${DISENO.textSizeMobile} ${DISENO.textSizeDesktop} font-normal leading-relaxed text-gray-200 max-w-3xl mx-auto drop-shadow-sm px-2`}>
-              Detrás de esta organización se encuentra Sonia Alba Flores, Martillera Pública Nacional M.P. 177, 
-              quien cuenta con más de 10 años de trayectoria y un compromiso inquebrantable con la excelencia en el mercado inmobiliario. 
-              Nos especializamos en la compra, venta y gestión estratégica de propiedades, consolidándonos como un referente clave 
-              dentro del sector comercial al ofrecer soluciones eficientes mediante una sólida cartera de locales estratégicos 
-              y galpones optimizados para el desarrollo de sus proyectos.
+              Detrás de esta organización se encuentra Sonia Alba Flores, Martillera Pública Nacional (M.P. 177), profesional que desde el año 2008 acompaña a sus clientes con seriedad, ética y un profundo conocimiento del mercado. Nos especializamos en la compra, venta y administración estratégica de inmuebles, destacándonos como un aliado clave para empresas y emprendedores al facilitar soluciones ágiles mediante una selecta cartera de locales comerciales y galpones industriales diseñados para potenciar el desarrollo de sus negocios.
             </p>
 
           </div>

@@ -14,7 +14,7 @@ export const productsData = [
         name: 'DEPARTAMENTO en Barrio Los Perales',
         price: "480000",
         category: 'Alquiler',
-        description: 'Cocina , comedor, dormitorio,  antebaño baño , balcón y cochera. Para mas información comunicarse al 388-4881245 de 9 a 13 y de 16 a 18 hs. Martillera Sonia Flores MP 177',
+        description: 'Cocina , comedor, dormitorio,  antebaño baño , balcón y cochera.',
         detalles: {
             tipo: 'departamento',
             barrio: 'Los Perales',
@@ -36,71 +36,65 @@ export const productsData = [
         }
     },
     {
-        id: 2,
+        id: 2, 
         images: [
-          '/propiedades/local-centro-alquila.png', 
-          '/propiedades/local-centro-alquila.mp4', 
+        '/propiedades/casa-belgrano-alquiler.png', 
+        '/propiedades/casa-belgrano-alquiler.mp4', 
         ],
-        name: 'Local a pasos de la peatonal',
-        price: "A consultar",
+        name: 'CASA en Calle Belgrano',
+        price: "0", // Al estar en 0, mostrará 'A consultar' gracias a tu lógica
         category: 'Alquiler',
-        description: 'A metros de la peatonal Belgrano calle Necochea',
+        description: 'Excelente casa de dos plantas en calle Belgrano. Cuenta con recibidor, living comedor, cocina, patio, cochera y habitación de servicio. En planta alta dispone de 3 dormitorios (uno con vestidor, uno con balcón y otro con placard) y baño completo.',
         detalles: {
-            tipo: 'Local',
+            tipo: 'casa',
             barrio: 'Centro',
-            calle: 'Necochea',
-            numero: '',
+            cocheras: 1,
+            ambientes: 6, // Recibidor, Living Comedor, Cocina + 3 Dormitorios
+            calle: 'Belgrano',
+            numero: '', // Se deja vacío ya que no se especifica la altura exacta
+            dormitorios: 3, // Planta alta (1 con vestidor, 1 con balcón, 1 con placard) + 1 de servicio abajo
+            banos: 2, // Toilette en Planta Baja y Baño completo en Planta Alta
             mostrarDireccionExacta: false,
-            superficie_m2: 30,
+            superficie_m2: "a consultar",
             frente_m: "a consultar",
             fondo_m: "a consultar",
-            ambientes: 1,
-            banos: 1,
-            servicios: ['Agua Potable', 'Cloaca', 'Electricidad'],
-            adicionales: [],
-            mapaQuery: 'Barrio Centro, San Salvador de Jujuy',
-            lat: -24.185278,
-            lon: -65.304163,
-        }
+            servicios: ['A consultar'],
+            adicionales: ['Cochera', 'Patio', 'Balcón', 'Vestidor', 'Habitación de servicio'],
+            mapaQuery: 'Calle Belgrano, San Salvador de Jujuy',
+            lat: -24.1856, 
+            lon: -65.3032,
+            }
     },
     {
-        id: 3,
+        id: 3, // Cambiá el ID según corresponda en tu array
         images: [
-          '/propiedades/casa-bajolavina-venta.png', 
-          '/propiedades/casa-bajolavina-venta-i1.png', 
-          '/propiedades/casa-bajolavina-venta-i2.png',
-          '/propiedades/casa-bajolavina-venta-i3.png',
-          '/propiedades/casa-bajolavina-venta-i4.png',
-          '/propiedades/casa-bajolavina-venta-i5.png',
-          '/propiedades/casa-bajolavina-venta-i6.png',
-          '/propiedades/casa-bajolavina-venta-i7.png',
-          '/propiedades/casa-bajolavina-venta-i8.png',
-          '/propiedades/casa-bajolavina-venta-i9.png',
-          '/propiedades/casa-bajolavina-venta-i10.png',
-          '/propiedades/casa-bajolavina-venta-i11.png',
-          '/propiedades/casa-bajolavina-venta-i12.png',
-          '/propiedades/casa-bajolavina-venta.mp4',
+        '/propiedades/local-palpala-alquiler.png', 
+        '/propiedades/local-palpala-alquiler.mp4',
+        // Podés agregar más fotos o videos del salón acá
         ],
-        name: 'Casa en Bajo la Viña',
-        price: 600000,
+        name: 'SALÓN COMERCIAL en Palpalá',
+        price: "650000", // Precio establecido en $650.000
         category: 'Alquiler',
-        description: 'Casa con dos dormitorios, Living comedor, galeria, entrada para vehiculos. Incluye cocina, comedor, baño, galeria, entrada para Vehiculos. Para mas información comunicarse al 388-4881245 de 9 a 13 y de 16 a 18 hs. Martillera Sonia Flores MP 177',
+        description: 'Excelente salón comercial de 180m² en Palpalá con baño, patio y dos habitaciones. Ideal para gimnasio, estética, salón de fiestas, emprendimientos o vivienda. Zona de fácil acceso y estacionamiento.\n\n⚠️ REQUISITOS PARA ALQUILAR:\n• Recibo de sueldo del Solicitante y garante, que tripliquen el valor del alquiler.',
         detalles: {
-            tipo: 'Casa',
-            barrio: 'Bajo la Viña',
-            calle: 'A consultar',
-            numero: 'A consultar',
-            mostrarDireccionExacta: false,
-            superficie_m2: "A consultar",
-            ambientes: "A consultar",
-            dormitorios: 2,
+            tipo: 'local', // O 'salón' según cómo manejes tus tipos en el filtro
+            barrio: 'Palpalá',
+            cocheras: 0, // Se especifica zona de fácil estacionamiento afuera
+            ambientes: 3, // El salón principal + las 2 habitaciones
+            calle: '', // Sin especificar en los datos
+            numero: '',
+            dormitorios: 2, // Mapeado a las dos habitaciones que tiene
             banos: 1,
-            servicios: ['Agua Potable', 'Cloaca', 'Gas Embasado', 'Electricidad'],
-            adicionales: [],
-            mapaQuery: 'Patricias Argentinas 400, Centro, San Salvador de Jujuy',
-            lat: -24.180282869247712, 
-            lon: -65.28602468805403
-        }
+            mostrarDireccionExacta: false,
+            superficie_m2: "180", // Usamos los 180m2 del dato
+            frente_m: "a consultar",
+            fondo_m: "a consultar",
+            servicios: ['A consultar'],
+            adicionales: ['Patio', 'Estacionamiento fácil'],
+            mapaQuery: 'Palpalá, Jujuy',
+            lat: -24.2562, // Coordenadas aproximadas del centro de Palpalá
+            lon: -65.2119,
+         }
     },
     {
         id: 4,
@@ -118,7 +112,7 @@ export const productsData = [
         name: 'Oficina céntrica con vista a la calle',
         price: 'A consultar',
         category: 'Venta',
-        description: 'Excelente oficina ubicada en primer piso, con vista a la calle y emplazada en una zona céntrica. Ideal para estudios profesionales, consultorios u oficinas comerciales. Una excelente oportunidad de inversión, con opciones de entrega y financiación. Para mas información comunicarse al 388-4881245 de 9 a 13 y de 16 a 18 hs. Martillera Sonia Flores MP 177 ',
+        description: 'Excelente oficina ubicada en primer piso, con vista a la calle y emplazada en una zona céntrica. Ideal para estudios profesionales, consultorios u oficinas comerciales. Una excelente oportunidad de inversión, con opciones de entrega y financiación.',
         detalles: {
             tipo: 'Oficina',
             barrio: 'Centro',
@@ -150,17 +144,17 @@ export const productsData = [
           '/propiedades/deposito-altocomedero-alquiler-i7.png',
           '/propiedades/deposito-altocomedero-alquiler-i8.png',
         ],
-        name: 'Depósito/Galpón de 300 m² frente a Ruta N° 9 en Alto Comedero',
-        price: 2000000,
+        name: 'Depósitos/Galpónes de 640 m² frente a Ruta N° 9 en Alto Comedero',
+        price: 0,
         category: 'Alquiler',
-        description: 'Depósito a estrenar ubicado frente a Ruta Nacional N° 9, en Barrio Alto Comedero. Cuenta con salón, baño, kitchenette y patio. Superficie de 300 m², con opción de alquilar 600 m². Para mas información comunicarse al 388-4881245 de 9 a 13 y de 16 a 18 hs. Martillera Sonia Flores MP 177',
+        description: 'Excelente depósito a estrenar con ubicación estratégica y de alta visibilidad frente a la Ruta Nacional N° 9, en Barrio Alto Comedero. El predio cuenta con un total de 640 m² cubiertos, distribuidos en dos galpones modulares. Existe la opción de fragmentar el espacio para alquilar únicamente un solo sector de 320 m², adaptándose a la medida de tu negocio. Cada módulo cuenta con salón libre, baño, kitchenette y patio privado.',
         detalles: {
-            tipo: 'Depósito',
+            tipo: 'Galpon',
             barrio: 'Alto Comedero',
             calle: 'Ruta Nacional N° 9',
             numero: '',
             mostrarDireccionExacta: false,
-            superficie_m2: 300,
+            superficie_m2: 640,
             frente_m: 0,
             fondo_m: 0,
             ambientes: 1,
@@ -195,7 +189,7 @@ export const productsData = [
         name: 'Departamento de 1 dormitorio cerca del Parque San Martín',
         price: 'A consulta',
         category: 'Venta',
-        description: 'Departamento con excelente ubicación, a pocos metros del Parque San Martín. Cuenta con comedor, cocina, un dormitorio y baño. Ideal para vivienda o inversión. Para mas información comunicarse al 388-4881245 de 9 a 13 y de 16 a 18 hs. Martillera Sonia Flores MP 177',
+        description: 'Departamento con excelente ubicación, a pocos metros del Parque San Martín. Cuenta con comedor, cocina, un dormitorio y baño. Ideal para vivienda o inversión.',
         detalles: {
             tipo: 'Departamento',
             barrio: 'Centro',
@@ -223,7 +217,7 @@ export const productsData = [
         name: 'Departamentos de 1 dormitorio en Pasaje El Tala',
         price: 400000,
         category: 'Alquiler',
-        description: 'Departamento amplio y luminoso, ideal para una persona o pareja. Cuenta con un dormitorio, cocina comedor, baño y balcón. Excelente ubicación en Pasaje El Tala. Para mas información comunicarse al 388-4881245 de 9 a 13 y de 16 a 18 hs. Martillera Sonia Flores MP 177',
+        description: 'Departamento amplio y luminoso, ideal para una persona o pareja. Cuenta con un dormitorio, cocina comedor, baño y balcón. Excelente ubicación en Pasaje El Tala. \n\n⚠️ REQUISITOS PARA ALQUILAR:\n• Recibo de sueldo del Solicitante y garante, que tripliquen el valor del alquiler.',
         detalles: {
             tipo: 'Departamento',
             barrio: 'Cuyaya',
@@ -243,31 +237,34 @@ export const productsData = [
         }
     },
     {
-        id: 8,
+        id: 8, // Cambiá el ID según corresponda en tu array
         images: [
-          '/propiedades/departamento-brown-alquiler.png', 
-          '/propiedades/departamento-brown-alquila.mp4', 
+        '/propiedades/oficina-centro-alquiler-n2.png',
+        '/propiedades/oficina-centro-alquiler-n2.mp4', 
+        // Podés agregar más fotos o videos de la oficina acá
         ],
-        name: 'Departamento de 2 dormitorios sobre Av. Almirante Brown',
-        price: 470000,
+        name: 'OFICINA CÉNTRICA en Alquiler',
+        price: "350000", // Precio establecido en $350.000 (se le aplicará el /mes automáticamente)
         category: 'Alquiler',
-        description: 'Departamento ubicado sobre Av. Almirante Brown. Cuenta con cocina, 2 dormitorios (uno con aire acondicionado), baño y dos balcones pequeños. Expensas aproximadas de $30.000. Excelente opción para quienes buscan comodidad y buena ubicación. Para mas información comunicarse al 388-4881245 de 9 a 13 y de 16 a 18 hs. Martillera Sonia Flores MP 177',
+        description: 'Excelente oficina céntrica, ideal para profesionales (abogados, contadores, arquitectos, etc.). Cuenta con 2 salas de espera y opción de alquilar con o sin muebles. El precio incluye servicios (WiFi, etc.).\n\n⚠️ REQUISITOS PARA ALQUILAR:\n• Recibo de sueldo del Solicitante y garante, que tripliquen el valor del alquiler.',
         detalles: {
-            tipo: 'Departamento',
-            barrio: 'barrio Almirante Brown',
-            calle: 'Av. Almirante Brown',
+            tipo: 'oficina',
+            barrio: 'Centro',
+            cocheras: 0,
+            ambientes: 2, // Basado en las 2 salas de espera/oficinas
+            calle: '', // Zona céntrica sin especificar altura
             numero: '',
+            dormitorios: 0, // Al ser de uso profesional se setea en 0
+            banos: 1, // Baño estándar de oficina (o "a consultar")
             mostrarDireccionExacta: false,
-            superficie_m2: 0,
-            ambientes: 3,
-            dormitorios: 2,
-            banos: 1,
-            expensas: 30000,
-            servicios: ['Agua Potable', 'Cloaca', 'Electricidad', 'Pavimento',"ga"],
-            adicionales: ['Aire acondicionado en un dormitorio', '2 balcones'],
-            mapaQuery: 'Avenida Almirante Brown, San Salvador de Jujuy',
-            lat: -24.202653,
-            lon: -65.284040,
+            superficie_m2: "a consultar",
+            frente_m: "a consultar",
+            fondo_m: "a consultar",
+            servicios: ['WiFi', 'Luz', 'Agua'], // Especificados en el anuncio
+            adicionales: ['Opción amoblado', 'Salas de espera'],
+            mapaQuery: 'Centro, San Salvador de Jujuy',
+            lat: -24.1856, // Coordenadas aproximadas para el centro de San Salvador de Jujuy
+            lon: -65.3032,
         }
     },
     {
@@ -279,7 +276,7 @@ export const productsData = [
         name: 'Departamento de 2 dormitorios con excelente vista',
         price: 700000,
         category: 'Alquiler',
-        description: 'Departamento con living comedor, cocina, dos dormitorios, baño, lavadero y balcón. Se destaca por su excelente vista e iluminación natural. Para mas información comunicarse al 388-4881245 de 9 a 13 y de 16 a 18 hs. Martillera Sonia Flores MP 177',
+        description: 'Departamento con living comedor, cocina, dos dormitorios, baño, lavadero y balcón. Se destaca por su excelente vista e iluminación natural. \n\n⚠️ REQUISITOS PARA ALQUILAR:\n• Recibo de sueldo del Solicitante y garante, que tripliquen el valor del alquiler.',
         detalles: {
             tipo: 'Departamento',
             barrio: 'Los Perales',
@@ -301,84 +298,14 @@ export const productsData = [
     {
         id: 10,
         images: [
-          '/propiedades/departamento-centro-alquila.png', 
-          '/propiedades/departamento-centro-alquila.mp4', 
-        ],
-        name: 'Departamento de 6 ambientes en el Microcentro',
-        price: 1500000,
-        category: 'Alquiler',
-        description: 'Amplio departamento ubicado en pleno microcentro de San Salvador de Jujuy. Cuenta con 6 ambientes, baño, cocina, patio y dos balcones de uso exclusivo. Se destaca por su excelente iluminación natural. Ideal para vivienda familiar o para uso comercial. Para mas información comunicarse al 388-4881245 de 9 a 13 y de 16 a 18 hs. Martillera Sonia Flores MP 177',
-        detalles: {
-            tipo: 'Departamento',
-            barrio: 'Microcentro',
-            calle: 'Necochea y Belgrano',
-            numero: '',
-            mostrarDireccionExacta: false,
-            superficie_m2: 0,
-            ambientes: 6,
-            dormitorios: 0,
-            banos: 1,
-            expensas: 0,
-            servicios: ['Agua Potable', 'Cloaca', 'Electricidad', 'Pavimento',"gas"],
-            adicionales: [
-                '2 balcones de uso exclusivo',
-                'Patio',
-                'Excelente luz natural',
-                'Apto vivienda familiar',
-                'Apto local comercial'
-            ],
-            mapaQuery: 'Microcentro, San Salvador de Jujuy',
-            lat: -24.185786,
-            lon: -65.299476,
-        }
-    },
-    {
-        id: 11,
-        images: [
-          '/propiedades/departamento-centro-alquila-n2.png', 
-          '/propiedades/departamento-centro-alquila-n2.mp4', 
-        ],
-        name: 'Departamento de 3 dormitorios en Barrio Centro',
-        price: 800000,
-        category: 'Alquiler',
-        description: 'Amplio departamento ubicado en Barrio Centro. Cuenta con living comedor, cocina, 3 dormitorios con placares, lavadero, habitación de servicio, baño de servicio y un amplio balcón. Excelente vista e iluminación natural. Para mas información comunicarse al 388-4881245 de 9 a 13 y de 16 a 18 hs. Martillera Sonia Flores MP 177',
-        detalles: {
-            tipo: 'Departamento',
-            barrio: 'Centro',
-            calle: '',
-            numero: '',
-            mostrarDireccionExacta: false,
-            superficie_m2: 0,
-            ambientes: 5,
-            dormitorios: 3,
-            banos: 2,
-            expensas: 0,
-            servicios: ['Agua Potable', 'Cloaca', 'Electricidad', 'Pavimento',"gas"],
-            adicionales: [
-                'Placares en los dormitorios',
-                'Lavadero',
-                'Habitación de servicio',
-                'Baño de servicio',
-                'Amplio balcón',
-                'Excelente vista',
-                'Iluminación natural'
-            ],
-            mapaQuery: 'Centro, San Salvador de Jujuy',
-            lat: -24.187271429334597,
-            lon: -65.30912978971212,
-        }
-    },
-    {
-        id: 12,
-        images: [
           '/propiedades/casa-chijra-venta.png', 
           '/propiedades/casa-chijra-venta.mp4', 
           '/propiedades/tr3.jpg'
         ],
         name: 'Casa con departamento independiente a 30 m de Av. Mosconi',
-        price: 'A consulta',
+        price: 'A consultar',
         category: 'Venta',
-        description: 'Excelente propiedad desarrollada en dos plantas. En planta baja cuenta con living comedor, cocina comedor, dos dormitorios, habitación de usos múltiples, asador y cochera. En planta alta dispone de un departamento con entrada independiente, living comedor, amplia cocina con comedor diario, un dormitorio y baño. Todos los servicios y excelente ubicación, a solo 30 metros de Av. Mosconi. Para mas información comunicarse al 388-4881245 de 9 a 13 y de 16 a 18 hs. Martillera Sonia Flores MP 177',
+        description: 'Excelente propiedad desarrollada en dos plantas. En planta baja cuenta con living comedor, cocina comedor, dos dormitorios, habitación de usos múltiples, asador y cochera. En planta alta dispone de un departamento con entrada independiente, living comedor, amplia cocina con comedor diario, un dormitorio y baño. Todos los servicios y excelente ubicación, a solo 30 metros de Av. Mosconi.',
         detalles: {
             tipo: 'Casa',
             barrio: 'Chijra',
@@ -406,35 +333,7 @@ export const productsData = [
         }
     },
     {
-        id: 13,
-        images: [
-          '/propiedades/departamento-sanpedrito-alquila.png', 
-          '/propiedades/departamento-sanpedrito-alquila.mp4', 
-        ],
-        name: 'Departamento de 1 dormitorio en Planta Baja en San Pedrito',
-        price: 400000,
-        category: 'Alquiler',
-        description: 'Departamento en planta baja ubicado en Barrio San Pedrito. Cuenta con cocina comedor, baño y dormitorio. Excelente opción de alquiler en una zona de fácil acceso. Para mas información comunicarse al 388-4881245 de 9 a 13 y de 16 a 18 hs. Martillera Sonia Flores MP 177',
-        detalles: {
-            tipo: 'Departamento',
-            barrio: 'San Pedrito',
-            calle: 'Gobernador Tello',
-            numero: '',
-            mostrarDireccionExacta: false,
-            superficie_m2: 0,
-            ambientes: 2,
-            dormitorios: 1,
-            banos: 1,
-            expensas: 0,
-            servicios: ['Agua Potable', 'Cloaca', 'Gas Natural', 'Electricidad', 'Pavimento'],
-            adicionales: ['Planta Baja'],
-            mapaQuery: 'Gobernador Tello, Barrio San Pedrito, San Salvador de Jujuy',
-            lat: -24.203559103532267,
-            lon: -65.27390369740094,
-        }
-    },
-    {
-        id: 14,
+        id: 11,
         images: [
           '/propiedades/hectareas-sanantonio-venta.png', 
           '/propiedades/hectareas-sanantonio-venta.mp4', 
@@ -442,7 +341,7 @@ export const productsData = [
         name: 'Terreno de 20 hectáreas en San Antonio',
         price: 'A consultar',
         category: 'Venta',
-        description: 'Campo de 20 hectáreas ubicado en San Antonio, sobre El Camino Real. Superficie totalmente plana, ideal para diversos emprendimientos. Zona con gran valor cultural e histórico por ser punto de partida de la Marcha Patriótica por el Camino Real. Para mas información comunicarse al 388-4881245 de 9 a 13 y de 16 a 18 hs. Martillera Sonia Flores MP 177',
+        description: 'Campo de 20 hectáreas ubicado en San Antonio, sobre El Camino Real. Superficie totalmente plana, ideal para diversos emprendimientos. Zona con gran valor cultural e histórico por ser punto de partida de la Marcha Patriótica por el Camino Real. ',
         detalles: {
             tipo: 'Terreno',
             barrio: 'San Antonio',
@@ -459,34 +358,6 @@ export const productsData = [
             mapaQuery: 'Camino Real, San Antonio, Jujuy',
             lat: -24.365787548293422, 
             lon: -65.33530500933232,
-        }
-    },
-    {
-        id: 15,
-        images: [
-          '/propiedades/oficina-centro-alquila-n2.png', 
-          '/propiedades/oficina-centro-alquila.mp4', 
-        ],
-        name: 'Oficinas en 1° piso en pleno Centro',
-        price: 500000,
-        category: 'Alquiler',
-        description: 'Dos oficinas en alquiler ubicadas en pleno centro. Cuenta con sala de espera y baño, ideales para profesionales, estudios u oficinas administrativas. Para mas información comunicarse al 388-4881245 de 9 a 13 y de 16 a 18 hs. Martillera Sonia Flores MP 177',
-        detalles: {
-            tipo: 'Oficina',
-            barrio: 'Centro',
-            calle: '',
-            numero: '',
-            mostrarDireccionExacta: false,
-            superficie_m2: 0,
-            ambientes: 3,
-            dormitorios: 0,
-            banos: 1,
-            expensas: 0,
-            servicios: ['Agua Potable', 'Cloaca', 'Electricidad', 'Pavimento'],
-            adicionales: ['1° piso', 'Sala de espera', 'Dos oficinas', 'Pleno centro'],
-            mapaQuery: 'Centro, San Salvador de Jujuy',
-            lat: -24.182925943398676, 
-            lon: -65.30921562039984,
         }
     },
 ]

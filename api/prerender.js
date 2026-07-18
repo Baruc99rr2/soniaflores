@@ -4,7 +4,7 @@ export default async function handler(req, res) {
     
     // Evitamos problemas de dobles barras '/' en la URL de destino
     const cleanPath = path.startsWith('/') ? path : `/${path}`;
-    const targetUrl = `https://soniaflores.vercel.app${cleanPath}`;
+    const targetUrl = `https://inmobiliariasoniaflores.com${cleanPath}`;
     const prerenderUrl = `https://service.prerender.io/${targetUrl}`;
 
     const response = await fetch(prerenderUrl, {
