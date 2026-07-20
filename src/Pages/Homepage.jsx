@@ -10,7 +10,8 @@ import Servicios from '../Components/Servicios' // Importamos la nueva sección 
 // Importamos el logo para que Vite/React resuelva la ruta física del asset
 import SoniaLogo from '../assets/SoniaLogo.png'
 
-const Homepage = () => {
+// RECIBIMOS EL PROP DESDE APP.JSX PARA CONTROLAR LA PANTALLA DE CARGA
+const Homepage = ({ onVideoLoaded }) => {
   // Construimos de forma dinámica las URLs absolutas que exigen las redes sociales
   const absoluteLogoUrl = `${window.location.origin}${SoniaLogo}`
   const currentUrl = window.location.href
@@ -37,7 +38,8 @@ const Homepage = () => {
       </Helmet>
 
       <div>
-        <Hero />
+        {/* LE PASAMOS LA FUNCIÓN DE CARGA AL HERO */}
+        <Hero onVideoLoaded={onVideoLoaded} />
         <ProductList />
         <Carrusel />
         <Nosotros /> {/* Ubicada estratégicamente antes de AboutUs como carta de presentación */}

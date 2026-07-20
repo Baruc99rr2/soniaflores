@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Navbar from './Components/Navbar'
 import Footer from './Components/Footer'
 import Homepage from './Pages/Homepage'
@@ -7,31 +7,42 @@ import ProductDetails from './Pages/ProductDetails'
 import Busqueda from './Components/Busqueda/Busqueda' 
 import { Routes, Route } from 'react-router-dom'
 
-// IMPORTAMOS TU LOGO DESDE LA RUTA ESPECIFICADA
 import SoniaLogo from './assets/SoniaLogo.png'
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
   const [progress, setProgress] = useState(0);
+  
+  // NUEVOS ESTADOS PARA CONTROLAR EL COMPONENTE HERO
+  const [isVideoReady, setIsVideoReady] = useState(false);
+  const isVideoReadyRef = useRef(false);
+
+  // Función que llamará Hero cuando el video esté listo
+  const handleVideoLoaded = () => {
+    setIsVideoReady(true);
+    isVideoReadyRef.current = true;
+  };
 
   useEffect(() => {
-    // Verificamos si es la primera vez que ingresa en esta sesión
     const hasLoadedBefore = sessionStorage.getItem('hasLoadedBefore');
 
     if (hasLoadedBefore) {
-      // Si ya ingresó antes en esta sesión, quitamos la pantalla de carga inmediatamente
       setIsLoading(false);
       return;
     }
 
-    // Duración total de la carga: 8000 milisegundos
-    const duration = 6500; 
-    const intervalTime = 16; // Aproximadamente 60fps (1000ms / 60 frames = 16.6ms)
+    // Bajamos la duración visual de la barra a 3 segundos para que sea más ágil
+    const duration = 3000; 
+    const intervalTime = 16; 
     const step = 100 / (duration / intervalTime);
 
     const timer = setInterval(() => {
       setProgress((prev) => {
+        if (prev >= 95 && !isVideoReadyRef.current) {
+          // Si llega al 95% pero el video NO cargó, frena la barra ahí para esperar
+          return 95;
+        }
         if (prev >= 100) {
           clearInterval(timer);
           return 100;
@@ -40,34 +51,48 @@ const App = () => {
       });
     }, intervalTime);
 
-    // Al finalizar los 4.5s iniciamos el desvanecimiento suave (fade out)
-    const fadeTimeout = setTimeout(() => {
-      setFadeOut(true);
-      sessionStorage.setItem('hasLoadedBefore', 'true'); // Guardamos registro para no repetir
-      
-      // Esperamos que termine la transición de opacidad (500ms) antes de desmontar del DOM
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 500);
-    }, duration);
+    // Bucle de chequeo continuo para decidir cuándo ocultar el Loader de forma segura
+    const checkUnmountInterval = setInterval(() => {
+      // Se apaga si: El progreso llegó al final Y el video está listo
+      if (isVideoReadyRef.current) {
+        setProgress(100);
+        clearInterval(timer);
+        clearInterval(checkUnmountInterval);
+        clearTimeout(safetyTimeout); // Cancelamos el tiempo de seguridad
+
+        // Gatillamos el desvanecimiento
+        setFadeOut(true);
+        sessionStorage.setItem('hasLoadedBefore', 'true');
+        
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 500);
+      }
+    }, 100);
+
+    // TIEMPO DE SEGURIDAD (6.5 segundos): Si el video tarda una eternidad por mal internet, 
+    // forzamos la entrada igual para mostrar la hermosa imagen fija que pusimos de fondo.
+    const safetyTimeout = setTimeout(() => {
+      isVideoReadyRef.current = true; 
+    }, 6500);
 
     return () => {
       clearInterval(timer);
-      clearTimeout(fadeTimeout);
+      clearInterval(checkUnmountInterval);
+      clearTimeout(safetyTimeout);
     };
   }, []);
 
   return (
     <>
-      {/* PANTALLA DE CARGA (A 60 FPS CON TU IDENTIDAD DE MARCA) */}
+      {/* PANTALLA DE CARGA */}
       {isLoading && (
         <div 
           className={`fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-gradient-to-br from-red-700 via-red-950 to-neutral-950 transition-opacity duration-500 ease-out ${
             fadeOut ? 'opacity-0 pointer-events-none' : 'opacity-100'
           }`}
-          style={{ willChange: 'opacity' }} // Forzar aceleración GPU
+          style={{ willChange: 'opacity' }}
         >
-          {/* Logo animado con un leve pulso fluido */}
           <div className="relative mb-8 max-w-[200px] sm:max-w-[260px] px-4 select-none animate-smooth-pulse">
             <img 
               src={SoniaLogo} 
@@ -77,27 +102,25 @@ const App = () => {
             />
           </div>
 
-          {/* Contenedor de la barra de progreso */}
           <div className="w-[180px] sm:w-[240px] h-[3px] bg-black/40 rounded-full overflow-hidden shadow-inner">
             <div 
               className="h-full bg-white rounded-full transition-all ease-out"
               style={{ 
                 width: `${progress}%`,
-                transitionDuration: '16ms', // Sincronizado a 60fps
-                willChange: 'width', // Optimización de renderizado para evitar lagunas visuales
+                transitionDuration: '16ms',
+                willChange: 'width',
                 boxShadow: '0 0 8px rgba(255, 255, 255, 0.8)'
               }}
             />
           </div>
 
-          {/* Texto secundario minimalista */}
           <p className="text-[10px] tracking-[0.25em] text-white/40 uppercase mt-4 font-medium animate-pulse">
             Inmobiliaria Sonia Flores
           </p>
         </div>
       )}
 
-      {/* CONTENIDO PRINCIPAL DE LA APLICACIÓN */}
+      {/* CONTENIDO PRINCIPAL */}
       <div 
         className={`relative min-h-screen transition-opacity duration-700 ${
           isLoading ? 'opacity-0' : 'opacity-100'
@@ -107,7 +130,8 @@ const App = () => {
         <Navbar />
         
         <Routes>
-          <Route path='/' element={<Homepage />} />
+          {/* IMPORTANTE: Pasamos la función controladora de video a la Homepage */}
+          <Route path='/' element={<Homepage onVideoLoaded={handleVideoLoaded} />} />
           <Route path='/propiedades/:id' element={<ProductDetails />} /> 
           <Route path='/busqueda' element={<Busqueda />} /> 
         </Routes>
@@ -115,7 +139,6 @@ const App = () => {
         <Footer />
       </div>
 
-      {/* ESTILOS EXTRA PARA LA ANIMACIÓN FLUIDA DEL LOGO */}
       <style>{`
         @keyframes smoothPulse {
           0%, 100% {

@@ -39,7 +39,8 @@ export const productsData = [
         id: 2, 
         images: [
         '/propiedades/casa-belgrano-alquiler.png', 
-        '/propiedades/casa-belgrano-alquiler.mp4', 
+        '/propiedades/casa-belgrano-alquiler.mp4',
+        '/propiedades/casa-belgrano-alquiler2.mp4',
         ],
         name: 'CASA en Calle Belgrano',
         price: "0", // Al estar en 0, mostrará 'A consultar' gracias a tu lógica
@@ -145,7 +146,7 @@ export const productsData = [
           '/propiedades/deposito-altocomedero-alquiler-i8.png',
         ],
         name: 'Depósitos/Galpónes de 640 m² frente a Ruta N° 9 en Alto Comedero',
-        price: 0,
+        price: "a consultar",
         category: 'Alquiler',
         description: 'Excelente depósito a estrenar con ubicación estratégica y de alta visibilidad frente a la Ruta Nacional N° 9, en Barrio Alto Comedero. El predio cuenta con un total de 640 m² cubiertos, distribuidos en dos galpones modulares. Existe la opción de fragmentar el espacio para alquilar únicamente un solo sector de 320 m², adaptándose a la medida de tu negocio. Cada módulo cuenta con salón libre, baño, kitchenette y patio privado.',
         detalles: {
@@ -187,7 +188,7 @@ export const productsData = [
           '/propiedades/departamento-centro-venta-i14.png',
         ],
         name: 'Departamento de 1 dormitorio cerca del Parque San Martín',
-        price: 'A consulta',
+        price: 'A consultar',
         category: 'Venta',
         description: 'Departamento con excelente ubicación, a pocos metros del Parque San Martín. Cuenta con comedor, cocina, un dormitorio y baño. Ideal para vivienda o inversión.',
         detalles: {

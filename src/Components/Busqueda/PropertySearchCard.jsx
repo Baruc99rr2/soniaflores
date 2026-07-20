@@ -8,7 +8,21 @@ const PropertySearchCard = ({
   onHover, 
   onLeave 
 }) => {
-  const images = product.images && product.images.length > 0 ? product.images : ['/propiedades/unisex.jpg'];
+  // 1. FILTRAMOS EL ARRAY PARA QUEDARNOS SOLO CON IMÁGENES (IGNORANDO VIDEOS .mp4, .mov, .webm)
+  const allFiles = product.images && product.images.length > 0 ? product.images : ['/propiedades/unisex.jpg'];
+  
+  const images = allFiles.filter(file => {
+    const isVideo = file.toLowerCase().endsWith('.mp4') || 
+                    file.toLowerCase().endsWith('.mov') || 
+                    file.toLowerCase().endsWith('.webm');
+    return !isVideo; // Si no es video, se queda en la lista de imágenes
+  });
+
+  // Si por alguna razón la propiedad solo tenía videos, le dejamos la imagen por defecto
+  if (images.length === 0) {
+    images.push('/propiedades/unisex.jpg');
+  }
+
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
 
   const changeSlide = (e, direction) => {
@@ -48,6 +62,7 @@ const PropertySearchCard = ({
           loading="lazy" 
         />
 
+        {/* 2. LAS FLECHAS AHORA SOLO APARECEN SI QUEDÓ MÁS DE UNA IMAGEN TRAS EL FILTRADO */}
         {images.length > 1 && (
           <>
             <button 
