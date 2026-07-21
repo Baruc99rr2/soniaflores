@@ -62,8 +62,8 @@ export const productsData = [
             servicios: ['A consultar'],
             adicionales: ['Cochera', 'Patio', 'Balcón', 'Vestidor', 'Habitación de servicio'],
             mapaQuery: 'Calle Belgrano, San Salvador de Jujuy',
-            lat: -24.1856, 
-            lon: -65.3032,
+            lat: -24.185404, 
+            lon: -65.304056,
             }
     },
     {
@@ -361,4 +361,34 @@ export const productsData = [
             lon: -65.33530500933232,
         }
     },
+    {
+        id: 12,
+        images: [
+            '/propiedades/casa-santaana-alquiler.png', 
+            '/propiedades/casa-santaana-alquiler.mp4',
+        ],
+        name: 'Amplia Casa de 3 Dormitorios',
+        price: 580000, // En número sin comillas para que funcione perfecto con tus formateadores de precio
+        category: 'Alquiler',
+        description: 'Excelente casa familiar en alquiler ubicada en estratégica zona cercana a la empresa Santa Ana, con rápido y fácil acceso al centro y líneas de transporte. La propiedad cuenta con un cómodo living, comedor independiente, cocina funcional, 3 amplios dormitorios, 2 baños completos y un lindo patio ideal para disfrutar al aire libre.\n\n⚠️ REQUISITOS PARA ALQUILAR:\n• Recibo de sueldo del Solicitante y garante, que tripliquen el valor del alquiler.',
+        detalles: {
+            tipo: 'Casa',
+            barrio: 'A consultar', // Mantiene la referencia de valor sin mencionar San Isidro
+            cocheras: 0, 
+            ambientes: 5, // Living, comedor, y los 3 dormitorios
+            calle: 'A consultar', 
+            numero: '',
+            dormitorios: 3,
+            banos: 2,
+            mostrarDireccionExacta: false,
+            superficie_m2: "a consultar", 
+            frente_m: "a consultar",
+            fondo_m: "a consultar",
+            servicios: ['Agua corriente', 'Luz eléctrica', 'Gas'],
+            adicionales: ['Patio', 'Cercanía a colectivos', 'Excelente conectividad'],
+            mapaQuery: 'Empresa Santa Ana, San Salvador de Jujuy, Jujuy', // Apunta el mapa a la zona de referencia
+            lat: -24.190449, 
+            lon: -65.284728,
+  }
+  },
 ]
