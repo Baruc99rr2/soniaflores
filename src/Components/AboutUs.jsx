@@ -66,7 +66,7 @@ const AboutUs = () => {
             </h3>
           </div>
           <p className="text-sm md:text-base text-gray-300 font-light leading-relaxed pl-8 md:pl-9">
-            En Sonia Flores Inmobiliaria impulsamos soluciones inmobiliarias y desarrollos innovadores de alta calidad en el norte argentino. En nuestro servicio combinamos la calidez de un trato cercano, el talento joven y nuevas tecnologías para abrir nuevas oportunidades.
+            En Sonia Flores Inmobiliaria transformamos el mercado inmobiliario del norte argentino a través de soluciones eficientes y desarrollos de alta calidad. Fusionamos la calidez del trato personal con el impulso del talento joven y la tecnología para generar mejores oportunidades para nuestros clientes.
           </p>
         </div>
 
@@ -81,7 +81,7 @@ const AboutUs = () => {
             </h3>
           </div>
           <p className="text-sm md:text-base text-gray-300 font-light leading-relaxed pl-8 md:pl-9">
-            Ser la inmobiliaria líder de Jujuy y referente digital del norte argentino, ofreciendo soluciones habitacionales y oportunidades de inversión ágiles, accesibles y transparentes. Impulsamos comunidades con proyectos innovadores y un servicio humano que combina velocidad, tecnología y talento joven en mejora continua.
+            Liderar el mercado inmobiliario de Jujuy y la innovación digital en el norte argentino, haciendo de la compra, venta, alquiler e inversión un proceso ágil, transparente y accesible. Impulsamos proyectos de impacto positivo guiados por un servicio dinámico, humano y en constante mejora.
           </p>
         </div>
 

@@ -73,7 +73,7 @@ export const productsData = [
         '/propiedades/local-palpala-alquiler.mp4',
         // Podés agregar más fotos o videos del salón acá
         ],
-        name: 'SALÓN COMERCIAL en Palpalá',
+        name: 'SALON COMERCIAL en Palpalá',
         price: "650000", // Precio establecido en $650.000
         category: 'Alquiler',
         description: 'Excelente salón comercial de 180m² en Palpalá con baño, patio y dos habitaciones. Ideal para gimnasio, estética, salón de fiestas, emprendimientos o vivienda. Zona de fácil acceso y estacionamiento.\n\n⚠️ REQUISITOS PARA ALQUILAR:\n• Recibo de sueldo del Solicitante y garante, que tripliquen el valor del alquiler.',
@@ -110,7 +110,7 @@ export const productsData = [
         '/propiedades/oficina-centro-venta-i8.png',
         '/propiedades/oficina-centro-venta-i9.png',
         ],
-        name: 'Oficina céntrica con vista a la calle',
+        name: 'Oficina céntrica con vista a la calle en Barrio Centro',
         price: 'A consultar',
         category: 'Venta',
         description: 'Excelente oficina ubicada en primer piso, con vista a la calle y emplazada en una zona céntrica. Ideal para estudios profesionales, consultorios u oficinas comerciales. Una excelente oportunidad de inversión, con opciones de entrega y financiación.',
@@ -131,7 +131,7 @@ export const productsData = [
             lat: -24.182943, 
             lon: -65.304468,
     }
-},
+    },
     {
         id: 5,
         images: [
@@ -187,7 +187,7 @@ export const productsData = [
           '/propiedades/departamento-centro-venta-i13.png',
           '/propiedades/departamento-centro-venta-i14.png',
         ],
-        name: 'Departamento de 1 dormitorio cerca del Parque San Martín',
+        name: 'Departamento de 1 dormitorio cerca del Parque San Martín Barrio Centro',
         price: 'A consultar',
         category: 'Venta',
         description: 'Departamento con excelente ubicación, a pocos metros del Parque San Martín. Cuenta con comedor, cocina, un dormitorio y baño. Ideal para vivienda o inversión.',
@@ -215,7 +215,7 @@ export const productsData = [
           '/propiedades/departamentos-pasaje-alquiler.png', 
           '/propiedades/departamento-pasaje-alquila.mp4', 
         ],
-        name: 'Departamentos de 1 dormitorio en Pasaje El Tala',
+        name: 'Departamentos de 1 dormitorio en Pasaje El Tala Barrio Cuyaya',
         price: 400000,
         category: 'Alquiler',
         description: 'Departamento amplio y luminoso, ideal para una persona o pareja. Cuenta con un dormitorio, cocina comedor, baño y balcón. Excelente ubicación en Pasaje El Tala. \n\n⚠️ REQUISITOS PARA ALQUILAR:\n• Recibo de sueldo del Solicitante y garante, que tripliquen el valor del alquiler.',
@@ -244,7 +244,7 @@ export const productsData = [
         '/propiedades/oficina-centro-alquiler-n2.mp4', 
         // Podés agregar más fotos o videos de la oficina acá
         ],
-        name: 'OFICINA CÉNTRICA en Alquiler',
+        name: 'OFICINA CÉNTRICA en Alquiler Barrio Centro',
         price: "350000", // Precio establecido en $350.000 (se le aplicará el /mes automáticamente)
         category: 'Alquiler',
         description: 'Excelente oficina céntrica, ideal para profesionales (abogados, contadores, arquitectos, etc.). Cuenta con 2 salas de espera y opción de alquilar con o sin muebles. El precio incluye servicios (WiFi, etc.).\n\n⚠️ REQUISITOS PARA ALQUILAR:\n• Recibo de sueldo del Solicitante y garante, que tripliquen el valor del alquiler.',
@@ -274,7 +274,7 @@ export const productsData = [
           '/propiedades/departamento-losperales-alquila-n2.png', 
           '/propiedades/departamento-losperales-alquila-n2.mp4', 
         ],
-        name: 'Departamento de 2 dormitorios con excelente vista',
+        name: 'Departamento de 2 dormitorios con excelente vista Barrio Los Perales',
         price: 700000,
         category: 'Alquiler',
         description: 'Departamento con living comedor, cocina, dos dormitorios, baño, lavadero y balcón. Se destaca por su excelente vista e iluminación natural. \n\n⚠️ REQUISITOS PARA ALQUILAR:\n• Recibo de sueldo del Solicitante y garante, que tripliquen el valor del alquiler.',
@@ -303,7 +303,7 @@ export const productsData = [
           '/propiedades/casa-chijra-venta.mp4', 
           '/propiedades/tr3.jpg'
         ],
-        name: 'Casa con departamento independiente a 30 m de Av. Mosconi',
+        name: 'Casa con departamento independiente a 30 m de Av. Mosconi Barrio Chijra',
         price: 'A consultar',
         category: 'Venta',
         description: 'Excelente propiedad desarrollada en dos plantas. En planta baja cuenta con living comedor, cocina comedor, dos dormitorios, habitación de usos múltiples, asador y cochera. En planta alta dispone de un departamento con entrada independiente, living comedor, amplia cocina con comedor diario, un dormitorio y baño. Todos los servicios y excelente ubicación, a solo 30 metros de Av. Mosconi.',
@@ -389,6 +389,67 @@ export const productsData = [
             mapaQuery: 'Empresa Santa Ana, San Salvador de Jujuy, Jujuy', // Apunta el mapa a la zona de referencia
             lat: -24.190449, 
             lon: -65.284728,
-  }
-  },
+        }
+    },
+    {
+        id: 13,
+        images: [
+            '/propiedades/local-brown-alquiler.jpg', 
+            '/propiedades/local-brown-alquiler.mp4', 
+        ],
+        name: 'Amplio Salón Comercial en Calle Almirante Brown',
+        price: "a consultar",
+        category: 'Alquiler',
+        description: 'Excelente salón comercial estratégicamente ubicado sobre la calle Almirante Brown al 800, ideal para empresas automotoras o venta de productos de gran porte, zona de alto flujo.\n\nLa propiedad dispone de un amplio salón principal, oficina de gran tamaño, oficina secundaria, kitchenette, baño y antebaño.',
+        detalles: {
+            tipo: 'Local',
+            barrio: 'Almirante Brown',
+            cocheras: 0, 
+            ambientes: 3, 
+            calle: 'Almirante Brown', 
+            numero: '800',
+            dormitorios: 0,
+            banos: 1,
+            mostrarDireccionExacta: false,
+            superficie_m2: 'a consultar', 
+            frente_m: 'a consultar',
+            fondo_m: 'a consultar',
+            servicios: ['Agua corriente', 'Luz eléctrica'],
+            adicionales: ['Salón principal amplio', 'Oficina grande', 'Oficina chica', 'Kitchenette', 'Antebaño', 'Ubicación comercial estratégica'],
+            mapaQuery: 'Almirante Brown 800, San Salvador de Jujuy, Jujuy',
+            lat: -24.198048, 
+            lon: -65.287170,
+        }
+    },
+    {
+        id: 14,
+        images: [
+            '/propiedades/nave-sanpedrito-alquiler/nave-sanpedrito-alquiler.jpg', 
+            '/propiedades/nave-sanpedrito-alquiler/nave-sanpedrito-alquiler.mp4'
+        ],
+        name: 'Amplia Nave Industrial en San Pedrito por Avenida 2 de Abril',
+        price: 0,
+        category: 'Alquiler',
+        description: 'Excelente nave versátil con posibilidad de subdividirse en 2, 3 o 4 módulos según la necesidad del emprendimiento. Ubicación estratégica sobre rotonda antes de llegar a Río Blanco, ideal para corralones, depósitos, empresas constructoras o venta de materiales de todo tipo.',
+        detalles: {
+            tipo: 'Nave',
+            barrio: 'San Pedrito',
+            cocheras: 0, 
+            ambientes: 1,
+            calle: 'Avenida 2 de Abril', 
+            numero: '',
+            dormitorios: 0,
+            banos: 0,
+            mostrarDireccionExacta: false,
+            superficie_m2: 'a consultar', 
+            frente_m: 'a consultar',
+            fondo_m: 'a consultar',
+            servicios: ['Agua corriente'], 
+            adicionales: ['Posibilidad de subdivisión (2, 3 o 4 módulos)', 'Apto corralón', 'Apto depósito', 'Excelente acceso para logística', 'Ubicación en rotonda'],
+            mapaQuery: 'San Pedrito, Jujuy',
+            lat: -24.219350, 
+            lon: -65.262579,
+        }
+    },
+  
 ]

@@ -87,7 +87,7 @@ const SearchFilters = ({
               className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-md text-xs focus:outline-none focus:border-red-500"
             >
               <option value="">Todos</option>
-              {["Casa", "Terreno", "Departamento", "Local", "Galpon"].map(t => (
+              {["Casa", "Terreno", "Departamento", "Local", "Galpon","Nave"].map(t => (
                 <option key={t} value={t}>{t}</option>
               ))}
             </select>

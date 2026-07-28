@@ -8,6 +8,7 @@ const MobileFiltersModal = ({
   handleInputChange,
   handleSearch,
   handleClearFilters
+  
 }) => {
   const barriosUnicos = ["Bajo La Viña", "Los Perales", "Centro", "Ciudad de Nieva", "Almirante Brown", 
                         "Mariano Moreno", "Palpalá", "Cuyaya", "San Pedrito", "Alto Comedero", "Yala", "San Pablo de Reyes, San Antonio"];
@@ -91,7 +92,7 @@ const MobileFiltersModal = ({
                 className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg text-sm"
               >
                 <option value="">Todos</option>
-                {["Casa", "Terreno", "Departamento", "Local", "Galpon"].map(t => (
+                {["Casa", "Terreno", "Departamento", "Local", "Galpon","Nave"].map(t => (
                   <option key={t} value={t}>{t}</option>
                 ))}
               </select>
