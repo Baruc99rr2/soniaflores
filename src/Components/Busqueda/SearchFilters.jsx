@@ -9,7 +9,7 @@ const SearchFilters = ({
   setIsAdvancedOpen
 }) => {
   const barriosUnicos = ["Bajo La Viña", "Los Perales", "Centro", "Ciudad de Nieva", "Almirante Brown", 
-                        "Moreno", "Palpalá", "Cuyaya", "San Pedrito", "Alto Comedero", "Yala", "San Pablo de Reyes"];
+                        "Moreno", "Palpalá", "Cuyaya", "San Pedrito", "Alto Comedero", "Yala", "San Pablo de Reyes, Gorriti"];
 
   return (
     <form onSubmit={handleSearch} className="hidden md:block w-full bg-white border-b border-gray-200 px-4 md:px-8 py-3 relative z-30 mt-4 md:mt-4.5">

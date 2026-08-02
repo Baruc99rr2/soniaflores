@@ -11,7 +11,7 @@ const MobileFiltersModal = ({
   
 }) => {
   const barriosUnicos = ["Bajo La Viña", "Los Perales", "Centro", "Ciudad de Nieva", "Almirante Brown", 
-                        "Mariano Moreno", "Palpalá", "Cuyaya", "San Pedrito", "Alto Comedero", "Yala", "San Pablo de Reyes, San Antonio"];
+                        "Mariano Moreno", "Palpalá", "Cuyaya", "San Pedrito", "Alto Comedero", "Yala", "San Pablo de Reyes, San Antonio, Gorriti"];
 
   if (!isOpen) return null;
 

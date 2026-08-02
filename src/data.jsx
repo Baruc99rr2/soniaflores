@@ -451,5 +451,40 @@ export const productsData = [
             lon: -65.262579,
         }
     },
-  
+    {
+        id: 15,
+        images: [
+            '/propiedades/casa-gorriti-alquiler/gorriti-casa-alquiler.jpg',
+            '/propiedades/casa-gorriti-alquiler/gorriti-casa-alquiler.mp4'
+        ],
+        name: 'Casa de 2 Dormitorios en Barrio Gorriti',
+        price: 620000,
+        category: 'Alquiler',
+        description: 'Cómoda casa ubicada en Barrio Gorriti, a metros de la intersección de calle Uriondo y Juana Manuela Gorriti. Cuenta con dos dormitorios, living, comedor, cocina, lavadero y baño, ideal para familias que buscan una excelente ubicación y ambientes funcionales. \n\n⚠️ REQUISITOS PARA ALQUILAR:\n• Recibo de sueldo del Solicitante y garante, que tripliquen el valor del alquiler.',
+        detalles: {
+                tipo: 'Casa',
+                barrio: 'Gorriti',
+                cocheras: 0,
+                ambientes: 6,
+                calle: 'Uriondo',
+                numero: '',
+                dormitorios: 2,
+                banos: 1,
+                mostrarDireccionExacta: false,
+                superficie_m2: 'a consultar',
+                frente_m: 'a consultar',
+                fondo_m: 'a consultar',
+                servicios: [],
+                adicionales: [
+                    'Living',
+                    'Comedor',
+                    'Cocina',
+                    'Lavadero',
+                    'Ubicación cercana a Juana Manuela Gorriti'
+                ],
+                mapaQuery: 'Uriondo casi Juana Manuela Gorriti, Barrio Gorriti, San Salvador de Jujuy',
+                lat: -24.191679,
+                lon: -65.296576,
+            }
+    },
 ]
