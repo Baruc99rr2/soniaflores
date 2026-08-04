@@ -21,7 +21,7 @@ export default async function handler(req, res) {
         res.setHeader(key, value);
       }
     });
-
+//amo renderio
     const html = await response.text();
     res.status(response.status).send(html);
 
