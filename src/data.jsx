@@ -457,15 +457,15 @@ export const productsData = [
             '/propiedades/casa-gorriti-alquiler/gorriti-casa-alquiler.jpg',
             '/propiedades/casa-gorriti-alquiler/gorriti-casa-alquiler.mp4'
         ],
-        name: 'Casa de 2 Dormitorios en Barrio Gorriti',
+        name: 'Departamento con 2 Dormitorios en Barrio Gorriti',
         price: 620000,
         category: 'Alquiler',
-        description: 'Cómoda casa ubicada en Barrio Gorriti, a metros de la intersección de calle Uriondo y Juana Manuela Gorriti. Cuenta con dos dormitorios, living, comedor, cocina, lavadero y baño, ideal para familias que buscan una excelente ubicación y ambientes funcionales. \n\n⚠️ REQUISITOS PARA ALQUILAR:\n• Recibo de sueldo del Solicitante y garante, que tripliquen el valor del alquiler.',
+        description: 'Cómodo departamento ubicada en Barrio Gorriti, a metros de la intersección de calle Uriondo y Juana Manuela Gorriti. Cuenta con dos dormitorios, living, comedor, cocina, lavadero y baño, ideal para familias que buscan una excelente ubicación y ambientes funcionales. \n\n⚠️ REQUISITOS PARA ALQUILAR:\n• Recibo de sueldo del Solicitante y garante, que tripliquen el valor del alquiler.',
         detalles: {
-                tipo: 'Casa',
+                tipo: 'Departamento',
                 barrio: 'Gorriti',
                 cocheras: 0,
-                ambientes: 6,
+                ambientes: 3,
                 calle: 'Uriondo',
                 numero: '',
                 dormitorios: 2,
@@ -486,5 +486,48 @@ export const productsData = [
                 lat: -24.191679,
                 lon: -65.296576,
             }
+    },
+    {
+        id: 16,
+        images: [
+            '/propiedades/centro-departamento-alquiler/centro-departamento-alquiler.png',
+            '/propiedades/centro-departamento-alquiler/centro-departamento-alquiler.mp4'
+        ],
+        name: 'Departamento de 1 Dormitorio en Barrio Centro',
+        price: 'a consultar',
+        category: 'Alquiler',
+        description: 'Amplio y luminoso departamento ubicado sobre calle Belgrano en pleno Barrio Centro. Cuenta con cocina, comedor, un dormitorio y baño completo. Posee acceso a todos los servicios básicos, ideal para quienes buscan comodidad y excelente ubicación céntrica.\n\n⚠️ REQUISITOS PARA ALQUILAR:\n• Recibo de sueldo del Solicitante y garante, que tripliquen el valor del alquiler.',
+        detalles: {
+            tipo: 'Departamento',
+            barrio: 'Centro',
+            cocheras: 0,
+            ambientes: 2,
+            calle: 'Belgrano',
+            numero: '',
+            dormitorios: 1,
+            banos: 1,
+            mostrarDireccionExacta: false,
+            superficie_m2: 'a consultar',
+            frente_m: 'a consultar',
+            fondo_m: 'a consultar',
+            servicios: [
+                'Agua Potable',
+                'Electricidad',
+                'Gas Natural',
+                'Cloaca',
+                'Pavimento',
+                'Internet'
+            ],
+            adicionales: [
+                'Comedor',
+                'Cocina',
+                'Luminoso',
+                'Amplios Ambientes',
+                'Ubicación Céntrica'
+            ],
+            mapaQuery: 'Calle Belgrano, Barrio Centro, San Salvador de Jujuy',
+            lat: -24.185335,
+            lon: -65.302671,
+        }
     },
 ]
