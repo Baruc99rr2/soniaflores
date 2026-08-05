@@ -530,4 +530,52 @@ export const productsData = [
             lon: -65.302671,
         }
     },
+    {
+        id: 17, // O el ID que corresponda en tu sistema
+        images: [
+            '/propiedades/departamento-losperales-alquiler/departamento-losperales-alquiler.jpg',
+            '/propiedades/departamento-losperales-alquiler/departamento-losperales-alquilervideofinal.mp4'
+        ],
+        name: 'Departamento de 2 Dormitorios en Barrio Los Perales',
+        price: 'a consultar',
+        category: 'Alquiler',
+        description: 'Hermoso y pintoresco departamento de 2 dormitorios ubicado en Barrio Los Perales, a metros de la Av. Illia.\n\nCuenta con living-comedor integrado muy amplio y luminoso, cocina funcional, antebaño, baño completo y balcón. Además, el edificio dispone de terraza con asador y cochera.\n\n⚠️ REQUISITOS PARA ALQUILAR:\n• Consultar requisitos de ingreso y documentación por privado antes de agendar visita.',
+        detalles: {
+            tipo: 'Departamento',
+            barrio: 'Los Perales',
+            cocheras: 1,
+            ambientes: 3, // Living-comedor + 2 dormitorios
+            calle: '',
+            numero: '',
+            dormitorios: 2,
+            banos: 1,
+            mostrarDireccionExacta: false,
+            superficie_m2: 'a consultar',
+            frente_m: 'a consultar',
+            fondo_m: 'a consultar',
+            servicios: [
+                'Agua Potable',
+                'Electricidad',
+                'Gas Natural',
+                'Cloaca',
+                'Pavimento',
+                'Internet'
+            ],
+            adicionales: [
+                'Living Comedor',
+                'Cocina',
+                'Antebaño',
+                'Baño Completo',
+                'Balcón',
+                'Cochera',
+                'Terraza con Asador',
+                'Luminoso',
+                'Amplios Ambientes',
+                'Cerca de Zona Comercial'
+            ],
+            mapaQuery: 'Barrio Los Perales, San Salvador de Jujuy',
+            lat: -24.175112,
+            lon: -65.318285
+        }
+    }
 ]
