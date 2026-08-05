@@ -193,7 +193,7 @@ export const productsData = [
         description: 'Departamento con excelente ubicación, a pocos metros del Parque San Martín. Cuenta con comedor, cocina, un dormitorio y baño. Ideal para vivienda o inversión.',
         detalles: {
             tipo: 'Departamento',
-            barrio: 'Centro',
+            barrio: 'Barrio Centro',
             calle: '',
             numero: '',
             mostrarDireccionExacta: false,
@@ -205,8 +205,8 @@ export const productsData = [
             servicios: ['Agua Potable', 'Cloaca', 'Electricidad', 'Pavimento',"gas"],
             adicionales: ['Excelente ubicación', 'Cerca del Parque San Martín'],
             mapaQuery: 'Parque San Martín, San Salvador de Jujuy',
-            lat: -24.189119,
-            lon: -65.297721,
+            lat: -24.182718,
+            lon: -65.315007,
         }
     },
     {
@@ -250,7 +250,7 @@ export const productsData = [
         description: 'Excelente oficina céntrica, ideal para profesionales (abogados, contadores, arquitectos, etc.). Cuenta con 2 salas de espera y opción de alquilar con o sin muebles. El precio incluye servicios (WiFi, etc.).\n\n⚠️ REQUISITOS PARA ALQUILAR:\n• Recibo de sueldo del Solicitante y garante, que tripliquen el valor del alquiler.',
         detalles: {
             tipo: 'oficina',
-            barrio: 'Centro',
+            barrio: 'Barrio Centro',
             cocheras: 0,
             ambientes: 2, // Basado en las 2 salas de espera/oficinas
             calle: '', // Zona céntrica sin especificar altura
@@ -280,7 +280,7 @@ export const productsData = [
         description: 'Departamento con living comedor, cocina, dos dormitorios, baño, lavadero y balcón. Se destaca por su excelente vista e iluminación natural. \n\n⚠️ REQUISITOS PARA ALQUILAR:\n• Recibo de sueldo del Solicitante y garante, que tripliquen el valor del alquiler.',
         detalles: {
             tipo: 'Departamento',
-            barrio: 'Los Perales',
+            barrio: 'Barrio Los Perales',
             calle: '',
             numero: '',
             mostrarDireccionExacta: false,
@@ -309,7 +309,7 @@ export const productsData = [
         description: 'Excelente propiedad desarrollada en dos plantas. En planta baja cuenta con living comedor, cocina comedor, dos dormitorios, habitación de usos múltiples, asador y cochera. En planta alta dispone de un departamento con entrada independiente, living comedor, amplia cocina con comedor diario, un dormitorio y baño. Todos los servicios y excelente ubicación, a solo 30 metros de Av. Mosconi.',
         detalles: {
             tipo: 'Casa',
-            barrio: 'Chijra',
+            barrio: 'Barrio Chijra',
             calle: 'Av. Mosconi',
             numero: '',
             mostrarDireccionExacta: false,
@@ -346,7 +346,7 @@ export const productsData = [
         detalles: {
             tipo: 'Terreno',
             barrio: 'San Antonio',
-            calle: 'Camino Real',
+            calle: 'calle Camino Real',
             numero: '',
             mostrarDireccionExacta: false,
             superficie_m2: 200000,
@@ -403,10 +403,10 @@ export const productsData = [
         description: 'Excelente salón comercial estratégicamente ubicado sobre la calle Almirante Brown al 800, ideal para empresas automotoras o venta de productos de gran porte, zona de alto flujo.\n\nLa propiedad dispone de un amplio salón principal, oficina de gran tamaño, oficina secundaria, kitchenette, baño y antebaño.',
         detalles: {
             tipo: 'Local',
-            barrio: 'Almirante Brown',
+            barrio: 'Barrio Almirante Brown',
             cocheras: 0, 
             ambientes: 3, 
-            calle: 'Almirante Brown', 
+            calle: 'Avenida Almirante Brown', 
             numero: '800',
             dormitorios: 0,
             banos: 1,
@@ -433,7 +433,7 @@ export const productsData = [
         description: 'Excelente nave versátil con posibilidad de subdividirse en 2, 3 o 4 módulos según la necesidad del emprendimiento. Ubicación estratégica sobre rotonda antes de llegar a Río Blanco, ideal para corralones, depósitos, empresas constructoras o venta de materiales de todo tipo.',
         detalles: {
             tipo: 'Nave',
-            barrio: 'San Pedrito',
+            barrio: 'Barrio San Pedrito',
             cocheras: 0, 
             ambientes: 1,
             calle: 'Avenida 2 de Abril', 
@@ -463,10 +463,10 @@ export const productsData = [
         description: 'Cómodo departamento ubicada en Barrio Gorriti, a metros de la intersección de calle Uriondo y Juana Manuela Gorriti. Cuenta con dos dormitorios, living, comedor, cocina, lavadero y baño, ideal para familias que buscan una excelente ubicación y ambientes funcionales. \n\n⚠️ REQUISITOS PARA ALQUILAR:\n• Recibo de sueldo del Solicitante y garante, que tripliquen el valor del alquiler.',
         detalles: {
                 tipo: 'Departamento',
-                barrio: 'Gorriti',
+                barrio: 'Barrio Gorriti',
                 cocheras: 0,
                 ambientes: 3,
-                calle: 'Uriondo',
+                calle: 'calle Uriondo',
                 numero: '',
                 dormitorios: 2,
                 banos: 1,
@@ -499,10 +499,10 @@ export const productsData = [
         description: 'Amplio y luminoso departamento ubicado sobre calle Belgrano en pleno Barrio Centro. Cuenta con cocina, comedor, un dormitorio y baño completo. Posee acceso a todos los servicios básicos, ideal para quienes buscan comodidad y excelente ubicación céntrica.\n\n⚠️ REQUISITOS PARA ALQUILAR:\n• Recibo de sueldo del Solicitante y garante, que tripliquen el valor del alquiler.',
         detalles: {
             tipo: 'Departamento',
-            barrio: 'Centro',
+            barrio: 'Barrio Centro',
             cocheras: 0,
             ambientes: 2,
-            calle: 'Belgrano',
+            calle: 'calle Belgrano',
             numero: '',
             dormitorios: 1,
             banos: 1,
@@ -542,7 +542,7 @@ export const productsData = [
         description: 'Hermoso y pintoresco departamento de 2 dormitorios ubicado en Barrio Los Perales, a metros de la Av. Illia.\n\nCuenta con living-comedor integrado muy amplio y luminoso, cocina funcional, antebaño, baño completo y balcón. Además, el edificio dispone de terraza con asador y cochera.\n\n⚠️ REQUISITOS PARA ALQUILAR:\n• Recibo de sueldo del Solicitante y garante, que tripliquen el valor del alquiler.',
         detalles: {
             tipo: 'Departamento',
-            barrio: 'Los Perales',
+            barrio: 'Barrio Los Perales',
             cocheras: 1,
             ambientes: 3, // Living-comedor + 2 dormitorios
             calle: '',
@@ -573,7 +573,7 @@ export const productsData = [
                 'Amplios Ambientes',
                 'Cerca de Zona Comercial'
             ],
-            mapaQuery: 'Barrio Los Perales, San Salvador de Jujuy',
+            mapaQuery: 'Barrio Los Perales San Salvador de Jujuy',
             lat: -24.167417,
             lon: -65.327809
         }
