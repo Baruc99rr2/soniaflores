@@ -539,7 +539,7 @@ export const productsData = [
         name: 'Departamento de 2 Dormitorios en Barrio Los Perales',
         price: 'a consultar',
         category: 'Alquiler',
-        description: 'Hermoso y pintoresco departamento de 2 dormitorios ubicado en Barrio Los Perales, a metros de la Av. Illia.\n\nCuenta con living-comedor integrado muy amplio y luminoso, cocina funcional, antebaño, baño completo y balcón. Además, el edificio dispone de terraza con asador y cochera.\n\n⚠️ REQUISITOS PARA ALQUILAR:\n• Consultar requisitos de ingreso y documentación por privado antes de agendar visita.',
+        description: 'Hermoso y pintoresco departamento de 2 dormitorios ubicado en Barrio Los Perales, a metros de la Av. Illia.\n\nCuenta con living-comedor integrado muy amplio y luminoso, cocina funcional, antebaño, baño completo y balcón. Además, el edificio dispone de terraza con asador y cochera.\n\n⚠️ REQUISITOS PARA ALQUILAR:\n• Recibo de sueldo del Solicitante y garante, que tripliquen el valor del alquiler.',
         detalles: {
             tipo: 'Departamento',
             barrio: 'Los Perales',
@@ -574,8 +574,8 @@ export const productsData = [
                 'Cerca de Zona Comercial'
             ],
             mapaQuery: 'Barrio Los Perales, San Salvador de Jujuy',
-            lat: -24.175112,
-            lon: -65.318285
+            lat: -24.167417,
+            lon: -65.327809
         }
     }
 ]
