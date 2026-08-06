@@ -577,5 +577,45 @@ export const productsData = [
             lat: -24.167417,
             lon: -65.327809
         }
-    }
+    },
+        {
+            id: 18, // O el ID que corresponda en tu sistema
+            images: [
+                '/propiedades/local-palpala-alquiler/local-palpala-alquiler1.jpg',
+                '/propiedades/local-palpala-alquiler/local-palpala-alquiler.mp4'
+            ],
+            name: 'Locales Comerciales a Estrenar sobre Av. Libertad',
+            price: '200.000',
+            category: 'Alquiler',
+            description: 'Inmobiliaria Sonia Flores alquila locales comerciales a estrenar sobre Avenida Libertad al 200, Palpalá. Ideales para emprender o expandir tu negocio en una zona de constante tránsito.\n\nPrecios desde $200.000.\n\n⚠️ REQUISITOS PARA ALQUILAR:\n• Recibo de sueldo del Solicitante y garante, que tripliquen el valor del alquiler.\n\n📞 Para más información comunicarse al 3884881245 de 9 a 13 y de 16 a 18 hs.\nMartillera Sonia Flores MP 177.',
+            detalles: {
+                tipo: 'Local Comercial',
+                barrio: 'Palpalá',
+                cocheras: 0,
+                ambientes: 1,
+                calle: 'Avenida Libertad',
+                numero: '200',
+                dormitorios: 0,
+                banos: 1,
+                mostrarDireccionExacta: true,
+                superficie_m2: 'a consultar',
+                frente_m: 'a consultar',
+                fondo_m: 'a consultar',
+                servicios: [
+                    'Agua Potable',
+                    'Electricidad',
+                    'Cloaca',
+                    'Pavimento'
+                ],
+                adicionales: [
+                    'A Estrenar',
+                    'Sobre Avenida Principal',
+                    'Zona Comercial',
+                    'Plano Disponible'
+                ],
+                mapaQuery: 'Avenida Libertad 200, Palpalá, Jujuy',
+                lat: -24.255143,
+                lon: -65.203527
+                }
+        }
 ]
