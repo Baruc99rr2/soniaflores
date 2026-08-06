@@ -584,10 +584,10 @@ export const productsData = [
                 '/propiedades/local-palpala-alquiler/local-palpala-alquiler1.jpg',
                 '/propiedades/local-palpala-alquiler/local-palpala-alquiler.mp4'
             ],
-            name: 'Locales Comerciales a Estrenar sobre Av. Libertad',
+            name: 'Locales Comerciales sobre Av. Libertad en Palpala',
             price: '200.000',
             category: 'Alquiler',
-            description: 'Inmobiliaria Sonia Flores alquila locales comerciales a estrenar sobre Avenida Libertad al 200, Palpalá. Ideales para emprender o expandir tu negocio en una zona de constante tránsito.\n\nPrecios desde $200.000.\n\n⚠️ REQUISITOS PARA ALQUILAR:\n• Recibo de sueldo del Solicitante y garante, que tripliquen el valor del alquiler.\n\n📞 Para más información comunicarse al 3884881245 de 9 a 13 y de 16 a 18 hs.\nMartillera Sonia Flores MP 177.',
+            description: 'Inmobiliaria Sonia Flores alquila locales comerciales sobre Avenida Libertad al 200, Palpalá. Ideales para emprender o expandir tu negocio en una zona de constante tránsito.\n\nPrecios desde $200.000.\n\n⚠️ REQUISITOS PARA ALQUILAR:\n• Recibo de sueldo del Solicitante y garante, que tripliquen el valor del alquiler.\n\n📞 Para más información comunicarse al 3884881245 de 9 a 13 y de 16 a 18 hs.\nMartillera Sonia Flores MP 177.',
             detalles: {
                 tipo: 'Local Comercial',
                 barrio: 'Palpalá',
